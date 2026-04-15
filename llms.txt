@@ -1,6 +1,6 @@
 # Ayush Dutta - Security Researcher & Developer
 
-> 22-year-old security researcher and developer. GitHub Campus Expert, Keploy API Fellow, OffSec bounty hunter. Building accessible security education through MagmaCore and Cylynk.
+> 22-year-old security researcher and developer. GitHub Campus Expert, Keploy API Fellow, OffSec bounty hunter. Building accessible security education through MagmaCore and Cylynk. Zero-JS portfolio at berzi.one.
 
 ## About
 
@@ -8,22 +8,22 @@ Passionate about cybersecurity, penetration testing, and making security educati
 
 ## Projects
 
-- **densezk**: Mobile-first zero-knowledge proof SDK achieving 17x performance boost
-- **lumen**: LLM-assisted malware analysis framework (150+ users)
-- **dialga**: Version control system in Rust
-- **lemonx**: AI agents for automated bug finding and fixing
-- **OSMsec**: Vulnerable security labs with real exploits for learning
-- **LemonX**: AI-driven bug detection using GitHub Actions
+- [densezk](https://github.com/spirizeon/densezk): Mobile-first zero-knowledge proof SDK achieving 17x performance boost
+- [lumen](https://github.com/spirizeon/lumen): LLM-assisted malware analysis framework (150+ users)
+- [dialga](https://github.com/spirizeon/dialga): Version control system in Rust
+- [lemonx](https://lemonx.berzi.one): AI agents for automated bug finding and fixing
+- [OSMsec](https://osmsec.xyz): Vulnerable security labs with real exploits for learning
+- [LemonX](https://lemonx.berzi.one): AI-driven bug detection using GitHub Actions
 
 ## Work Experience
 
-- **MagmaCore**: Open source mentee through Linux Foundation, building future of telecom
-- **Cylynk**: Building accessible security education in Melbourne
-- **OSMsec**: Created vulnerable labs used by thousands
+- [MagmaCore](https://magmacore.io): Open source mentee through Linux Foundation, building future of telecom
+- [Cylynk](https://cylynk.com/): Building accessible security education in Melbourne
+- [OSMsec](https://osmsec.xyz): Created vulnerable labs used by thousands
 
 ## Education
 
-- B.Tech at SRM University-AP
+- [SRM University-AP](https://www.srmap.edu.in): B.Tech program
 
 ## Skills
 
@@ -37,12 +37,18 @@ Cybersecurity, Penetration Testing, Bug Bounty, Zero-Knowledge Proofs, Rust, Web
 - [LinkedIn](https://linkedin.com/in/ayushduttasrmap): Professional profile
 - [Twitter/X](https://x.com/berzelion): Personal account
 - [Email](mailto:dutta_ayush@srmap.edu.in): Contact email
+- [MagmaCore](https://magmacore.io): Linux Foundation open source
+- [Cylynk](https://cylynk.com/): Security education platform
+- [Next Tech Lab](https://nexttechlabap.in): QS Awarded student society
+- [FOSS United](https://fossunited.org): Open source advocacy
 
 ## Certifications & Achievements
 
-- GitHub Campus Expert (2% acceptance globally)
-- Keploy API Fellowship (5.4% acceptance)
-- OffSec Bounty Hunter
-- Founder of Google Developer Groups (1100+ members)
-- Lead at Next Tech Lab (QS Reimagine Education award)
-- Advisor at FOSS United, AWS Cloud Club, Hackshastra
+- [GitHub Campus Expert](https://github.com/campus-experts): 2% acceptance globally
+- [Keploy API Fellowship](https://keploy.io): 5.4% acceptance
+- [OffSec](https://offensive-security.com): Bounty hunter
+- [Google Developer Groups](https://gdg.community.dev): Founded chapter (1100+ members)
+- [Next Tech Lab](https://nexttechlabap.in): QS Reimagine Education award
+- [FOSS United](https://fossunited.org): Advisor
+- [AWS Cloud Club](https://www.meetup.com/aws-cloud-club-at-srm-university-andhra-pradesh/): Advisor
+- [Hackshastra](https://www.hackshastrasrmuap.dev/): Security event organizer
