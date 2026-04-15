@@ -1,4 +1,6 @@
-# Ayush Dutta - Full Content
+# Ayush Dutta - Security Researcher & Developer
+
+> 22-year-old security researcher and developer. GitHub Campus Expert, Keploy API Fellow, OffSec bounty hunter. Building accessible security education through MagmaCore and Cylynk. Zero-JS portfolio at berzi.one.
 
 ## Personal Introduction
 
@@ -20,11 +22,11 @@ Then I wondered: What if we could automate finding bugs? So I built LemonX. A sy
 
 While all this breaking was happening, I started building too.
 
-Densezk: A mobile-first zero-knowledge proof SDK that achieves 17x performance boost over existing solutions. Rust, React Native, Circom. Because privacy shouldn't be slow.
+**densezk**: A mobile-first zero-knowledge proof SDK that achieves 17x performance boost over existing solutions. Rust, React Native, Circom. Because privacy shouldn't be slow.
 
-Lumen: An LLM-assisted malware analysis framework that automates 90% of static analysis tasks. 150+ people have used it.
+**lumen**: An LLM-assisted malware analysis framework that automates 90% of static analysis tasks. 150+ people have used it.
 
-Dialga: A version control system in Rust. Started as learning, became useful.
+**dialga**: A version control system in Rust. Started as learning, became useful.
 
 ## Chapter 3: The Leading
 
@@ -40,20 +42,29 @@ I advise for FOSS United, AWS Cloud Club, and Hackshastra.
 
 I don't collect degrees. I collect proof.
 
-- GitHub Campus Expert. 2% global acceptance
-- Keploy API Fellowship. 5.4% acceptance
-- Bounty from OffSec
+- **GitHub Campus Expert** — 2% global acceptance
+- **Keploy API Fellowship** — 5.4% acceptance  
+- **OffSec Bounty Hunter** — received bounty from OffSec
 
 Currently pursuing B.Tech at SRM University-AP. The classroom taught me the least. What mattered most was showing up to different communities.
 
 ## Contact
 
-- Email: dutta_ayush@srmap.edu.in
-- GitHub: https://github.com/spirizeon
-- LinkedIn: https://linkedin.com/in/ayushduttasrmap
-- X (Twitter): https://x.com/berzelion
-- Blog: https://blog.berzi.one
+- **Email**: [dutta_ayush@srmap.edu.in](mailto:dutta_ayush@srmap.edu.in)
+- **GitHub**: [https://github.com/spirizeon](https://github.com/spirizeon)
+- **LinkedIn**: [https://linkedin.com/in/ayushduttasrmap](https://linkedin.com/in/ayushduttasrmap)
+- **X (Twitter)**: [https://x.com/berzelion](https://x.com/berzelion)
+- **Blog**: [https://blog.berzi.one](https://blog.berzi.one)
+- **Portfolio**: [https://berzi.one](https://berzi.one)
 
 ## Skills & Expertise
 
 Cybersecurity, Penetration Testing, Bug Bounty Hunting, Zero-Knowledge Proofs, Rust Programming, Web Security, Malware Analysis, Security Education, Open Source Development, LLM Applications, GitHub Actions, Community Building
+
+## Achievements
+
+- Founded Google Developer Groups (1100+ members, 9 months)
+- Lead at Next Tech Lab (QS Reimagine Education award, since 2017)
+- Advisor at FOSS United, AWS Cloud Club, Hackshastra
+- Created OSMsec vulnerable labs used by thousands globally
+- Built LemonX - AI-driven bug detection using GitHub Actions

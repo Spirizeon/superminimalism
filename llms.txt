@@ -1,6 +1,6 @@
 # Ayush Dutta - Security Researcher & Developer
 
-22-year-old security researcher and developer based in India. Open source contributor at MagmaCore through Linux Foundation, building accessible security education at Cylynk in Melbourne.
+> 22-year-old security researcher and developer. GitHub Campus Expert, Keploy API Fellow, OffSec bounty hunter. Building accessible security education through MagmaCore and Cylynk.
 
 ## About
 
@@ -12,25 +12,37 @@ Passionate about cybersecurity, penetration testing, and making security educati
 - **lumen**: LLM-assisted malware analysis framework (150+ users)
 - **dialga**: Version control system in Rust
 - **lemonx**: AI agents for automated bug finding and fixing
+- **OSMsec**: Vulnerable security labs with real exploits for learning
+- **LemonX**: AI-driven bug detection using GitHub Actions
 
 ## Work Experience
 
 - **MagmaCore**: Open source mentee through Linux Foundation, building future of telecom
 - **Cylynk**: Building accessible security education in Melbourne
+- **OSMsec**: Created vulnerable labs used by thousands
 
 ## Education
 
 - B.Tech at SRM University-AP
 
-## Links
-
-- Website: https://berzi.one/
-- Blog: https://blog.berzi.one/
-- GitHub: https://github.com/spirizeon
-- LinkedIn: https://linkedin.com/in/ayushduttasrmap
-- Twitter: https://x.com/berzelion
-- Email: dutta_ayush@srmap.edu.in
-
 ## Skills
 
-Cybersecurity, Penetration Testing, Bug Bounty, Zero-Knowledge Proofs, Rust, Web Security, Malware Analysis, Security Education
+Cybersecurity, Penetration Testing, Bug Bounty, Zero-Knowledge Proofs, Rust, Web Security, Malware Analysis, Security Education, LLM Applications, GitHub Actions
+
+## Links
+
+- [Portfolio](https://berzi.one/): Personal website and portfolio
+- [Blog](https://blog.berzi.one/): Technical blog with security research
+- [GitHub](https://github.com/spirizeon): Open source projects
+- [LinkedIn](https://linkedin.com/in/ayushduttasrmap): Professional profile
+- [Twitter/X](https://x.com/berzelion): Personal account
+- [Email](mailto:dutta_ayush@srmap.edu.in): Contact email
+
+## Certifications & Achievements
+
+- GitHub Campus Expert (2% acceptance globally)
+- Keploy API Fellowship (5.4% acceptance)
+- OffSec Bounty Hunter
+- Founder of Google Developer Groups (1100+ members)
+- Lead at Next Tech Lab (QS Reimagine Education award)
+- Advisor at FOSS United, AWS Cloud Club, Hackshastra
