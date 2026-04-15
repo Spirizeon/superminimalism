@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ayush dutta</title>
+  <style>
+    body {
+      background: #000000;
+      color: #ffffff;
+      font-family: monospace;
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 48px 24px;
+      position: relative;
+    }
+
+    .sword-container {
+      position: fixed;
+      left: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 200px;
+      height: 300px;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    canvas#sword {
+      width: 100%;
+      height: 100%;
+    }
+
+    a {
+      color: #83a598;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #ffffff;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+      font-weight: normal;
+    }
+
+    h2 {
+      font-size: 20px;
+      color: #83a598;
+      margin-top: 48px;
+      margin-bottom: 24px;
+      font-weight: normal;
+    }
+
+    h3 {
+      font-size: 16px;
+      color: #888888;
+      margin-top: 32px;
+      margin-bottom: 12px;
+      font-weight: normal;
+    }
+
+    p {
+      margin-bottom: 16px;
+    }
+
+    .story {
+      font-size: 18px;
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .chapter {
+      font-size: 20px;
+      color: #83a598;
+    }
+
+    .project {
+      color: #fb4934;
+      font-weight: bold;
+    }
+
+    .symbol {
+      color: #888888;
+      margin-right: 8px;
+    }
+
+    .bio {
+      font-size: 18px;
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .emphasis {
+      color: #888888;
+    }
+
+    .org-keyword {
+      color: #cc241d;
+    }
+
+    .org-todo {
+      color: #fb4934;
+    }
+
+    .org-done {
+      color: #98971a;
+    }
+
+    .org-tag {
+      color: #928374;
+    }
+
+    .org-link {
+      color: #83a598;
+    }
+
+    .org-property {
+      color: #b8bb26;
+    }
+
+    .org-comment {
+      color: #928374;
+    }
+
+    .org-bold {
+      color: #ffffff;
+      font-weight: bold;
+    }
+
+    .org-verse {
+      margin-left: 24px;
+    }
+
+    .symbol {
+      color: #888888;
+      margin-right: 8px;
+    }
+
+    .links {
+      margin-top: 8px;
+    }
+
+    footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid #333333;
+      color: #888888;
+    }
+
+    @media (max-width: 1000px) {
+      .sword-container {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="sword-container">
+  <canvas id="sword"></canvas>
+</div>
+
+<header>
+  <h1>Yes, I'm Ayush Dutta</h1>
+  <p>and you will love this story.</p>
+</header>
+
+<main>
+  <section>
+    <p class="story">once, a 22-year-old kid decided he wanted to understand how things break. not to break them for bad, but to learn how to fix them even better.</p>
+    
+    <p class="story">now i spend my days at <a href="https://magmacore.io">magmacore</a> as an open source mentee through the linux foundation, building the future of telecom. by night (and sometimes by day), i help build accessible security education at <a href="https://cylynk.com/">cylynk</a> in melbourne. because learning shouldn't cost a fortune.</p>
+    
+    <p class="story">my philosophy is simple: <span class="emphasis">don't tell me your title, show me your work.</span></p>
+  </section>
+
+  <section>
+    <p class="story">
+      <span class="chapter">~ chapter 1: the breaking</span>
+      <br><br>
+      it started with curiosity. i wanted to know what makes systems fail. so i built vulnerable labs for <a href="https://osmsec.xyz/">osmsec</a>. real ones, with real exploits. thousands of people use them to learn. i wrote proof-of-concepts that ended up on offsec and hackthebox.
+      <br><br>
+      then i wondered: what if we could automate finding bugs? so i built <a href="https://lemonx.berzi.one">lemonx</a>. a system where ai agents test and fix code together, running entirely on github action runners. zero compute cost, maximum utility.
+    </p>
+  </section>
+
+  <section>
+    <p class="story">
+      <span class="chapter">~ chapter 2: the building</span>
+      <br><br>
+      while all this breaking was happening, i started building too.
+      <br><br>
+      <span class="project">densezk</span>: a mobile-first zero-knowledge proof sdk that achieves <a href="https://blog.berzi.one/densezk">17x performance boost</a> over existing solutions. rust, react-native, circom. because privacy shouldn't be slow.
+      <br><br>
+      <span class="project">lumen</span>: an llm-assisted malware analysis framework that automates 90% of static analysis tasks. 150+ people have used it.
+      <br><br>
+      <span class="project">dialga</span>: a version control system in rust. started as learning, became useful.
+    </p>
+  </section>
+
+  <section>
+    <p class="story">
+      <span class="chapter">~ chapter 3: the leading</span>
+      <br><br>
+      i believe the best security education is accessible. that's why i built certification courses at cylynk for people who can't afford expensive training.
+      <br><br>
+      i founded <a href="https://gdg.community.dev/gdg-on-campus-srm-university-ap-amaravati-india/">google developer groups</a> at my campus. grew from zero to 1100 members in 9 months.
+      <br><br>
+      i lead <a href="https://nexttechlabap.in">next tech lab</a>. a qs reimagine education awarded student society running since 2017.
+      <br><br>
+      i advisor for <a href="https://fossunited.org/c/srm-university-ap">foss united</a>, <a href="https://www.meetup.com/aws-cloud-club-at-srm-university-andhra-pradesh/">aws cloud club</a>, and <a href="https://www.hackshastrasrmuap.dev/">hackshastra</a>.
+    </p>
+  </section>
+
+  <section>
+    <p class="story">
+      <span class="chapter">~ chapter 4: the proving</span>
+      <br><br>
+      i don't collect degrees. i collect proof.
+      <br><br>
+      <span class="checkbox">★</span> github campus expert. 2% global acceptance
+      <br>
+      <span class="checkbox">★</span> keploy api fellowship. 5.4% acceptance
+      <br>
+      <span class="checkbox">★</span> bounty from offsec
+      <br><br>
+      currently pursuing b.tech at <a href="https://www.srmap.edu.in">srm university-ap</a>. the classroom taught me the least. what mattered most was showing up to different communities.
+    </p>
+  </section>
+
+  <section>
+    <p class="story">
+      <span class="chapter">~ the end?</span>
+      <br><br>
+      <span class="emphasis">still writing...</span>
+      <br><br>
+      <span class="symbol">✉</span> <a href="mailto:dutta_ayush@srmap.edu.in">dutta_ayush@srmap.edu.in</a>
+      <br>
+      <span class="symbol">⬡</span> <a href="https://github.com/spirizeon">github</a>
+      <br>
+      <span class="symbol">◈</span> <a href="https://linkedin.com/in/ayushduttasrmap">linkedin</a>
+      <br>
+      <span class="symbol">✕</span> <a href="https://x.com/berzelion">x</a>
+      <br>
+      <span class="symbol">✎</span> <a href="https://blog.berzi.one">blog</a>
+    </p>
+  </section>
+</main>
+
+<footer>
+  <p>last updated: 2026-04-16</p>
+</footer>
+
+<script id="vs" type="x-shader/x-vertex">#version 300 es
+in vec4 a_position;
+void main() {
+  gl_Position = a_position;
+}
+</script>
+
+<script id="fs" type="x-shader/x-fragment">#version 300 es
+precision highp float;
+
+uniform vec2 iResolution;
+uniform float iTime;
+uniform vec2 iMouse;
+
+out vec4 fragColor;
+
+#define MAX_STEPS 100
+#define MAX_DIST 50.0
+#define SURF_DIST 0.001
+#define ZERO min(iFrame, 0)
+
+mat2 rot2D(float a) {
+    float s = sin(a), c = cos(a);
+    return mat2(c, -s, s, c);
+}
+
+float sdBox(vec3 p, vec3 b) {
+    vec3 q = abs(p) - b;
+    return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0);
+}
+
+float sdRoundBox(vec3 p, vec3 b, float r) {
+    vec3 q = abs(p) - b + r;
+    return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0) - r;
+}
+
+float sdCylinder(vec3 p, float r, float h) {
+    vec2 d = abs(vec2(length(p.xz), p.y)) - vec2(r, h);
+    return min(max(d.x, d.y), 0.0) + length(max(d, 0.0));
+}
+
+float sdSphere(vec3 p, float r) {
+    return length(p) - r;
+}
+
+float smin(float a, float b, float k) {
+    float h = max(k - abs(a - b), 0.0) / k;
+    return min(a, b) - h * h * k * 0.25;
+}
+
+vec3 palette(float t) {
+    vec3 a = vec3(0.5, 0.5, 0.5);
+    vec3 b = vec3(0.5, 0.5, 0.5);
+    vec3 c = vec3(1.0, 1.0, 1.0);
+    vec3 d = vec3(0.0, 0.33, 0.67);
+    return a + b * cos(6.28318 * (c * t + d));
+}
+
+float bayer4x4(vec2 px) {
+    const mat4 m = mat4(
+        0.0, 8.0, 2.0, 10.0,
+        12.0, 4.0, 14.0, 6.0,
+        3.0, 11.0, 1.0, 9.0,
+        15.0, 7.0, 13.0, 5.0
+    );
+    vec2 i = mod(floor(px), 4.0);
+    return m[int(i.y) * 4 + int(i.x)] / 16.0;
+}
+
+float swordSDF(vec3 p) {
+    float time = iTime * 0.8;
+    
+    vec3 q = p;
+    q.y -= 0.3;
+    q.xz *= rot2D(sin(time * 0.5) * 0.1);
+    
+    float blade = sdBox(q - vec3(0.0, 0.6, 0.0), vec3(0.02, 0.5, 0.005));
+    blade = smin(blade, sdBox(q - vec3(0.0, 1.1, 0.0), vec3(0.015, 0.05, 0.004)), 0.02);
+    
+    vec3 guardPos = q - vec3(0.0, 0.15, 0.0);
+    float guard = sdRoundBox(guardPos, vec3(0.12, 0.015, 0.02), 0.01);
+    
+    float handle = sdCylinder(q - vec3(0.0, -0.05, 0.0), 0.025, 0.2);
+    
+    float pommel = sdSphere(q - vec3(0.0, -0.28, 0.0), 0.04);
+    
+    float glow = sdBox(q - vec3(0.0, 0.8, 0.0), vec3(0.01, 0.3, 0.003));
+    
+    float d = blade;
+    d = smin(d, guard, 0.02);
+    d = smin(d, handle, 0.02);
+    d = smin(d, pommel, 0.02);
+    d = min(d, glow);
+    
+    return d;
+}
+
+vec2 map(vec3 p) {
+    float d = swordSDF(p);
+    float matId = 1.0;
+    if (swordSDF(p - vec3(0.0, 0.8, 0.0)) < 0.01) matId = 2.0;
+    return vec2(d, matId);
+}
+
+vec3 calcNormal(vec3 p) {
+    vec2 e = vec2(0.001, 0.0);
+    return normalize(vec3(
+        map(p + e.xyy).x - map(p - e.xyy).x,
+        map(p + e.yxy).x - map(p - e.yxy).x,
+        map(p + e.yyx).x - map(p - e.yyx).x
+    ));
+}
+
+vec2 raycast(vec3 ro, vec3 rd) {
+    float t = 0.0;
+    for (int i = 0; i < MAX_STEPS; i++) {
+        vec3 p = ro + rd * t;
+        vec2 h = map(p);
+        if (abs(h.x) < SURF_DIST * t || t > MAX_DIST) break;
+        t += h.x * 0.8;
+    }
+    return t > MAX_DIST ? vec2(-1.0) : vec2(t, map(ro + rd * t).y);
+}
+
+vec3 render(vec3 ro, vec3 rd) {
+    vec3 col = vec3(0.02, 0.02, 0.04);
+    
+    vec2 res = raycast(ro, rd);
+    if (res.x > 0.0) {
+        vec3 p = ro + rd * res.x;
+        vec3 n = calcNormal(p);
+        
+        vec3 lig = normalize(vec3(0.5, 0.8, 0.3));
+        float diff = clamp(dot(n, lig), 0.0, 1.0);
+        float amb = 0.3 + 0.7 * n.y;
+        
+        vec3 mate;
+        if (res.y > 1.5) {
+            float pulse = 0.5 + 0.5 * sin(iTime * 3.0);
+            mate = vec3(1.0, 1.0, 1.0) * (0.5 + 0.5 * pulse);
+        } else {
+            vec3 baseColor = vec3(1.0, 1.0, 1.0);
+            float fresnel = pow(1.0 - abs(dot(n, -rd)), 3.0);
+            mate = baseColor * (0.4 + 0.6 * diff) + fresnel * 0.15;
+        }
+        
+        col = mate * (diff * 0.7 + amb * 0.3);
+        
+        vec3 h = normalize(lig - rd);
+        float spec = pow(max(dot(n, h), 0.0), 64.0);
+        col += spec * 0.5 * vec3(1.0, 0.95, 0.9);
+        
+        col = mix(col, vec3(0.02, 0.02, 0.04), 1.0 - exp(-0.02 * res.x * res.x));
+    }
+    
+    return col;
+}
+
+vec3 tonemap(vec3 c) {
+    return c / (1.0 + c);
+}
+
+void mainImage(out vec4 fragColor, in vec2 fragCoord) {
+    vec2 uv = (fragCoord * 2.0 - iResolution.xy) / iResolution.y;
+    vec2 mo = iMouse.xy / iResolution.xy;
+    
+    float camDist = 2.5;
+    float camAngle = iTime * 0.2 + 6.28 * (mo.x - 0.5) * 0.5;
+    float camHeight = 0.3 + (mo.y - 0.5) * 0.5;
+    
+    vec3 ro = vec3(
+        camDist * sin(camAngle),
+        camHeight + 0.4,
+        camDist * cos(camAngle)
+    );
+    vec3 ta = vec3(0.0, 0.4, 0.0);
+    
+    vec3 ww = normalize(ta - ro);
+    vec3 uu = normalize(cross(ww, vec3(0.0, 1.0, 0.0)));
+    vec3 vv = cross(uu, ww);
+    vec3 rd = normalize(uv.x * uu + uv.y * vv + 2.0 * ww);
+    
+    vec3 col = render(ro, rd);
+    col = tonemap(col);
+    col = pow(col, vec3(1.0 / 2.2));
+    
+    float dither = bayer4x4(fragCoord) - 0.5;
+    col += dither * 0.008;
+    
+    fragColor = vec4(col, 1.0);
+}
+
+void main() {
+    mainImage(fragColor, gl_FragCoord.xy);
+}
+</script>
+
+<script>
+const canvas = document.getElementById('sword');
+const gl = canvas.getContext('webgl2');
+
+let iTime = 0;
+let iFrame = 0;
+let iMouse = [0, 0];
+let startTime = Date.now();
+
+const vsSource = document.getElementById('vs').text.trim();
+const fsSource = document.getElementById('fs').text.trim();
+
+function createShader(gl, type, source) {
+    const shader = gl.createShader(type);
+    gl.shaderSource(shader, source);
+    gl.compileShader(shader);
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        console.error(gl.getShaderInfoLog(shader));
+        gl.deleteShader(shader);
+        return null;
+    }
+    return shader;
+}
+
+const vs = createShader(gl, gl.VERTEX_SHADER, vsSource);
+const fs = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
+const program = gl.createProgram();
+gl.attachShader(program, vs);
+gl.attachShader(program, fs);
+gl.linkProgram(program);
+
+if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+    console.error(gl.getProgramInfoLog(program));
+}
+
+const posBuffer = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, posBuffer);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+    -1, -1, 1, -1, -1, 1,
+    -1, 1, 1, -1, 1, 1
+]), gl.STATIC_DRAW);
+
+const posLoc = gl.getAttribLocation(program, 'a_position');
+const resLoc = gl.getUniformLocation(program, 'iResolution');
+const timeLoc = gl.getUniformLocation(program, 'iTime');
+const mouseLoc = gl.getUniformLocation(program, 'iMouse');
+const frameLoc = gl.getUniformLocation(program, 'iFrame');
+
+function resize() {
+    canvas.width = canvas.clientWidth * window.devicePixelRatio;
+    canvas.height = canvas.clientHeight * window.devicePixelRatio;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+}
+resize();
+window.addEventListener('resize', resize);
+
+canvas.addEventListener('mousemove', (e) => {
+    iMouse[0] = e.offsetX * window.devicePixelRatio;
+    iMouse[1] = (canvas.height - e.offsetY * window.devicePixelRatio);
+});
+
+function render() {
+    iTime = (Date.now() - startTime) / 1000;
+    
+    gl.useProgram(program);
+    gl.enableVertexAttribArray(posLoc);
+    gl.bindBuffer(gl.ARRAY_BUFFER, posBuffer);
+    gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+    
+    gl.uniform2f(resLoc, canvas.width, canvas.height);
+    gl.uniform1f(timeLoc, iTime);
+    gl.uniform2f(mouseLoc, iMouse[0], iMouse[1]);
+    gl.uniform1i(frameLoc, iFrame);
+    
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+    
+    iFrame++;
+    requestAnimationFrame(render);
+}
+render();
+</script>
+
+</body>
+</html>
