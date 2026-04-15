@@ -1,0 +1,36 @@
+# Ayush Dutta - Security Researcher & Developer
+
+22-year-old security researcher and developer based in India. Open source contributor at MagmaCore through Linux Foundation, building accessible security education at Cylynk in Melbourne.
+
+## About
+
+Passionate about cybersecurity, penetration testing, and making security education accessible to everyone. GitHub Campus Expert (2% global acceptance), Keploy API Fellow (5.4% acceptance), and OffSec bounty hunter.
+
+## Projects
+
+- **densezk**: Mobile-first zero-knowledge proof SDK achieving 17x performance boost
+- **lumen**: LLM-assisted malware analysis framework (150+ users)
+- **dialga**: Version control system in Rust
+- **lemonx**: AI agents for automated bug finding and fixing
+
+## Work Experience
+
+- **MagmaCore**: Open source mentee through Linux Foundation, building future of telecom
+- **Cylynk**: Building accessible security education in Melbourne
+
+## Education
+
+- B.Tech at SRM University-AP
+
+## Links
+
+- Website: https://berzi.one/
+- Blog: https://blog.berzi.one/
+- GitHub: https://github.com/spirizeon
+- LinkedIn: https://linkedin.com/in/ayushduttasrmap
+- Twitter: https://x.com/berzelion
+- Email: dutta_ayush@srmap.edu.in
+
+## Skills
+
+Cybersecurity, Penetration Testing, Bug Bounty, Zero-Knowledge Proofs, Rust, Web Security, Malware Analysis, Security Education

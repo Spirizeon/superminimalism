@@ -3,7 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ayush dutta</title>
+  <title>Ayush Dutta | Security Researcher & Developer</title>
+  <meta name="description" content="Ayush Dutta - 22-year-old security researcher and developer. Open source contributor at MagmaCore, building accessible security education at CyLynk. GitHub Campus Expert, OffSec bounty hunter.">
+  <meta name="author" content="Ayush Dutta">
+  <meta name="keywords" content="Ayush Dutta, security researcher, penetration tester, bug bounty, open source, cybersecurity, ethical hacker, MagmaCore, CyLynk, developer, Rust, zero knowledge proofs">
+  <meta name="theme-color" content="#000000">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://berzi.one/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Ayush Dutta | Security Researcher & Developer">
+  <meta property="og:description" content="22-year-old security researcher building accessible security education. GitHub Campus Expert, OffSec bounty hunter.">
+  <meta property="og:url" content="https://berzi.one/">
+  <meta property="og:site_name" content="Ayush Dutta">
+  <meta property="og:image" content="https://berzi.one/og-image.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ayush Dutta | Security Researcher & Developer">
+  <meta name="twitter:description" content="22-year-old security researcher. GitHub Campus Expert, OffSec bounty hunter.">
+  <meta name="twitter:image" content="https://berzi.one/og-image.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔️</text></svg>">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ayush Dutta",
+    "url": "https://berzi.one/",
+    "jobTitle": "Security Researcher & Developer",
+    "description": "22-year-old security researcher and developer building accessible security education",
+    "sameAs": [
+      "https://github.com/spirizeon",
+      "https://linkedin.com/in/ayushduttasrmap",
+      "https://x.com/berzelion",
+      "https://blog.berzi.one"
+    ],
+    "knowsAbout": [
+      "Cybersecurity",
+      "Penetration Testing",
+      "Bug Bounty",
+      "Zero-Knowledge Proofs",
+      "Rust",
+      "Web Security",
+      "Malware Analysis"
+    ],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "MagmaCore",
+      "url": "https://magmacore.io"
+    },
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "SRM University-AP"
+    }
+  }
+  </script>
   <style>
     body {
       background: #000000;
@@ -145,6 +204,33 @@
       margin-top: 8px;
     }
 
+    /* Skip link for accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #83a598;
+      color: #000;
+      padding: 8px;
+      z-index: 100;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+
+    /* ARIA labels for interactive elements */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
     footer {
       margin-top: 64px;
       padding-top: 24px;
@@ -161,17 +247,20 @@
 </head>
 <body>
 
-<div class="sword-container">
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<div class="sword-container" role="img" aria-label="Animated 3D sword rendering">
   <canvas id="sword"></canvas>
 </div>
 
 <header>
-  <h1>Yes, I'm Ayush Dutta</h1>
+  <h1>Ayush Dutta — Security Researcher & Developer</h1>
   <p>and you will love this story.</p>
 </header>
 
-<main>
-  <section>
+<main id="main">
+  <section aria-labelledby="about-heading">
+    <h2 id="about-heading" class="sr-only">About Me</h2>
     <p class="story">once, a 22-year-old kid decided he wanted to understand how things break. not to break them for bad, but to learn how to fix them even better.</p>
     
     <p class="story">now i spend my days at <a href="https://magmacore.io">magmacore</a> as an open source mentee through the linux foundation, building the future of telecom. by night (and sometimes by day), i help build accessible security education at <a href="https://cylynk.com/">cylynk</a> in melbourne. because learning shouldn't cost a fortune.</p>
@@ -179,20 +268,18 @@
     <p class="story">my philosophy is simple: <span class="emphasis">don't tell me your title, show me your work.</span></p>
   </section>
 
-  <section>
+  <section aria-labelledby="breaking-heading">
+    <h2 id="breaking-heading">~ chapter 1: the breaking</h2>
     <p class="story">
-      <span class="chapter">~ chapter 1: the breaking</span>
-      <br><br>
       it started with curiosity. i wanted to know what makes systems fail. so i built vulnerable labs for <a href="https://osmsec.xyz/">osmsec</a>. real ones, with real exploits. thousands of people use them to learn. i wrote proof-of-concepts that ended up on offsec and hackthebox.
       <br><br>
       then i wondered: what if we could automate finding bugs? so i built <a href="https://lemonx.berzi.one">lemonx</a>. a system where ai agents test and fix code together, running entirely on github action runners. zero compute cost, maximum utility.
     </p>
   </section>
 
-  <section>
+  <section aria-labelledby="building-heading">
+    <h2 id="building-heading">~ chapter 2: the building</h2>
     <p class="story">
-      <span class="chapter">~ chapter 2: the building</span>
-      <br><br>
       while all this breaking was happening, i started building too.
       <br><br>
       <span class="project">densezk</span>: a mobile-first zero-knowledge proof sdk that achieves <a href="https://blog.berzi.one/densezk">17x performance boost</a> over existing solutions. rust, react-native, circom. because privacy shouldn't be slow.
@@ -203,10 +290,9 @@
     </p>
   </section>
 
-  <section>
+  <section aria-labelledby="leading-heading">
+    <h2 id="leading-heading">~ chapter 3: the leading</h2>
     <p class="story">
-      <span class="chapter">~ chapter 3: the leading</span>
-      <br><br>
       i believe the best security education is accessible. that's why i built certification courses at cylynk for people who can't afford expensive training.
       <br><br>
       i founded <a href="https://gdg.community.dev/gdg-on-campus-srm-university-ap-amaravati-india/">google developer groups</a> at my campus. grew from zero to 1100 members in 9 months.
@@ -217,10 +303,9 @@
     </p>
   </section>
 
-  <section>
+  <section aria-labelledby="proving-heading">
+    <h2 id="proving-heading">~ chapter 4: the proving</h2>
     <p class="story">
-      <span class="chapter">~ chapter 4: the proving</span>
-      <br><br>
       i don't collect degrees. i collect proof.
       <br><br>
       <span class="checkbox">★</span> github campus expert. 2% global acceptance
@@ -233,21 +318,20 @@
     </p>
   </section>
 
-  <section>
+  <section aria-labelledby="contact-heading">
+    <h2 id="contact-heading">~ the end?</h2>
     <p class="story">
-      <span class="chapter">~ the end?</span>
-      <br><br>
       <span class="emphasis">still writing...</span>
       <br><br>
-      <span class="symbol">✉</span> <a href="mailto:dutta_ayush@srmap.edu.in">dutta_ayush@srmap.edu.in</a>
+      <span class="symbol" aria-hidden="true">✉</span> <a href="mailto:dutta_ayush@srmap.edu.in">dutta_ayush@srmap.edu.in</a>
       <br>
-      <span class="symbol">⬡</span> <a href="https://github.com/spirizeon">github</a>
+      <span class="symbol" aria-hidden="true">⬡</span> <a href="https://github.com/spirizeon">github</a>
       <br>
-      <span class="symbol">◈</span> <a href="https://linkedin.com/in/ayushduttasrmap">linkedin</a>
+      <span class="symbol" aria-hidden="true">◈</span> <a href="https://linkedin.com/in/ayushduttasrmap">linkedin</a>
       <br>
-      <span class="symbol">✕</span> <a href="https://x.com/berzelion">x</a>
+      <span class="symbol" aria-hidden="true">✕</span> <a href="https://x.com/berzelion">x</a>
       <br>
-      <span class="symbol">✎</span> <a href="https://blog.berzi.one">blog</a>
+      <span class="symbol" aria-hidden="true">✎</span> <a href="https://blog.berzi.one">blog</a>
     </p>
   </section>
 </main>

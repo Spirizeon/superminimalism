@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://berzi.one/sitemap.xml
+
+# AI Crawlers - allow full access for GEO optimization
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /

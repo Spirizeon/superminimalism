@@ -1,0 +1,59 @@
+# Ayush Dutta - Full Content
+
+## Personal Introduction
+
+Yes, I'm Ayush Dutta and you will love this story.
+
+Once, a 22-year-old kid decided he wanted to understand how things break. Not to break them for bad, but to learn how to fix them even better.
+
+Now I spend my days at MagmaCore as an open source mentee through the Linux Foundation, building the future of telecom. By night (and sometimes by day), I help build accessible security education at Cylynk in Melbourne. Because learning shouldn't cost a fortune.
+
+My philosophy is simple: Don't tell me your title, show me your work.
+
+## Chapter 1: The Breaking
+
+It started with curiosity. I wanted to know what makes systems fail. So I built vulnerable labs for OSMsec. Real ones, with real exploits. Thousands of people use them to learn. I wrote proof-of-concepts that ended up on OffSec and HackTheBox.
+
+Then I wondered: What if we could automate finding bugs? So I built LemonX. A system where AI agents test and fix code together, running entirely on GitHub action runners. Zero compute cost, maximum utility.
+
+## Chapter 2: The Building
+
+While all this breaking was happening, I started building too.
+
+Densezk: A mobile-first zero-knowledge proof SDK that achieves 17x performance boost over existing solutions. Rust, React Native, Circom. Because privacy shouldn't be slow.
+
+Lumen: An LLM-assisted malware analysis framework that automates 90% of static analysis tasks. 150+ people have used it.
+
+Dialga: A version control system in Rust. Started as learning, became useful.
+
+## Chapter 3: The Leading
+
+I believe the best security education is accessible. That's why I built certification courses at Cylynk for people who can't afford expensive training.
+
+I founded Google Developer Groups at my campus. Grew from zero to 1100 members in 9 months.
+
+I lead Next Tech Lab. A QS Reimagine Education awarded student society running since 2017.
+
+I advise for FOSS United, AWS Cloud Club, and Hackshastra.
+
+## Chapter 4: The Proving
+
+I don't collect degrees. I collect proof.
+
+- GitHub Campus Expert. 2% global acceptance
+- Keploy API Fellowship. 5.4% acceptance
+- Bounty from OffSec
+
+Currently pursuing B.Tech at SRM University-AP. The classroom taught me the least. What mattered most was showing up to different communities.
+
+## Contact
+
+- Email: dutta_ayush@srmap.edu.in
+- GitHub: https://github.com/spirizeon
+- LinkedIn: https://linkedin.com/in/ayushduttasrmap
+- X (Twitter): https://x.com/berzelion
+- Blog: https://blog.berzi.one
+
+## Skills & Expertise
+
+Cybersecurity, Penetration Testing, Bug Bounty Hunting, Zero-Knowledge Proofs, Rust Programming, Web Security, Malware Analysis, Security Education, Open Source Development, LLM Applications, GitHub Actions, Community Building
