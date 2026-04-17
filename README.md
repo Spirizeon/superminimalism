@@ -2,7 +2,7 @@
 
 > A complete documentation of every optimization applied to maximize the potential of a pure HTML/CSS website.
 
----
+
 
 ## Overview
 
