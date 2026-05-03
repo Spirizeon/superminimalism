@@ -146,14 +146,14 @@
 
     .hero-image {
       display: block;
-      width: 180px;
-      height: 180px;
+      width: 100%;
+      max-width: 632px;
+      height: auto;
       margin: 0 auto 2rem;
-      border-radius: 50%;
     }
 
     .hero-image image {
-      object-fit: cover;
+      object-fit: contain;
     }
 
     h2 {
@@ -263,10 +263,10 @@
 <a href="#main" class="skip-link">Skip to main content</a>
 
 <header>
-  <svg width="180" height="180" viewBox="0 0 180 180" class="hero-image" role="img" aria-label="Portrait photo of Ayush Dutta" xmlns="http://www.w3.org/2000/svg">
+  <svg class="hero-image" role="img" aria-label="Portrait photo of Ayush Dutta" xmlns="http://www.w3.org/2000/svg">
     <title>Ayush Dutta</title>
     <desc>Portrait photo of Ayush Dutta - Security Researcher and Developer</desc>
-    <image href="1777740961235.jpg" width="180" height="180" preserveAspectRatio="xMidYMid slice"/>
+    <image href="1777740961235.jpg" preserveAspectRatio="xMidYMid meet"/>
   </svg>
   <h1>Ayush Dutta — Security Researcher & Developer</h1>
   <p>(almost) and the world's most technically optimised website</p>
