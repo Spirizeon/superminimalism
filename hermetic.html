@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- SEO / Social meta – same pattern as index.html -->
+  <title>hermetic patterns in life, death &amp; code</title>
+  <meta name="description"
+        content="What hermetic builds teach us about living: local-only restrictions, reproducibility and declarativeness through Bazel, Nix and Starlark – and what Stoics, karma yogis and tea masters figured out first.">
+  <meta name="keywords"
+        content="hermetic builds, bazel, nix, starlark, reproducibility, declarative, stoicism, karma yoga, ichigo ichie, wabi sabi, memento mori, philosophy, engineering">
+  <meta name="author" content="Ayush Dutta">
+  <meta name="theme-color" content="#000000">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://berzi.one/hermetic">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="hermetic patterns in life, death &amp; code">
+  <meta property="og:description"
+        content="Sealed vessels, pinned inputs and released outcomes – what Bazel, Nix and Starlark share with Stoics, karma yogis and tea masters.">
+  <meta property="og:url" content="https://berzi.one/hermetic">
+  <meta property="og:site_name" content="Ayush Dutta">
+  <meta property="og:image" content="https://berzi.one/og-image.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="hermetic patterns in life, death &amp; code">
+  <meta name="twitter:description"
+        content="Sealed vessels, pinned inputs and released outcomes – what Bazel, Nix and Starlark share with Stoics, karma yogis and tea masters.">
+  <meta name="twitter:image" content="https://berzi.one/og-image.png">
+
+  <!-- Structured Data – Person (unchanged) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ayush Dutta",
+    "url": "https://berzi.one/",
+    "jobTitle": "Security Researcher & Developer",
+    "description": "22‑year‑old security researcher and developer building accessible security education",
+    "sameAs": [
+      "https://github.com/spirizeon",
+      "https://linkedin.com/in/ayushduttasrmap",
+      "https://x.com/berzelion",
+      "https://blog.berzi.one"
+    ]
+  }
+  </script>
+
+  <!-- Structured Data – WebSite (unchanged) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Ayush Dutta",
+    "url": "https://berzi.one/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://berzi.one/?s={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- Inline stylesheet – identical to coffee.html -->
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    html{font-size:16px;-webkit-text-size-adjust:100%}
+    body{background:#000;color:#fff;font-family:monospace;font-size:1rem;line-height:1.8;max-width:680px;margin:0 auto;padding:48px 24px;position:relative}
+    a{color:#56a37c;text-decoration:underline;text-underline-offset:2px}
+    a:hover,a:focus{color:#fff}
+    a:focus-visible{outline:2px solid #83a598;outline-offset:2px}
+    h1{font-size:2rem;margin-bottom:.5rem;line-height:1.2}
+    h2{font-size:1.25rem;color:#56a37c;margin-top:3rem;margin-bottom:1.5rem}
+    p{margin-bottom:1rem}
+    .story{font-size:1.125rem;line-height:1.8;margin-bottom:2rem}
+    .author-byline{font-size:.875rem;color:#888;margin-top:.5rem}
+    .author-byline a{color:#56a37c;text-decoration:underline}
+    .emphasis{color:#888}
+    .skip-link{position:absolute;top:-100px;left:16px;background:#83a598;color:#000;padding:12px 16px;z-index:100;font-weight:bold;border-radius:0 0 4px 4px}
+    .skip-link:focus{top:0}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+    @media(forced-colors:active){a{text-decoration:underline}}
+    footer{margin-top:4rem;padding-top:1.5rem;border-top:1px solid #333;color:#888}
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header>
+  <h1>hermetic patterns in life, death &amp; code</h1>
+  <p>pinned inputs, released outcomes – a nerd's guide to impermanence</p>
+  <p class="author-byline"><a href="/">← back to home</a></p>
+</header>
+
+<main id="main">
+
+  <!-- Intro -->
+  <section aria-labelledby="intro-heading">
+    <h2 id="intro-heading" class="sr-only">Why hermetic matters</h2>
+    <p class="story">
+      The word <em>hermetic</em> didn't start in a build system. It started with <strong>Hermes Trismegistus</strong>, the mythical figure alchemists credited with the line <em>"as above, so below"</em>. Alchemists would seal their vessels airtight so nothing could enter and nothing could escape – a closed world where the transformation inside depended only on what you put in. They called these seals <em>hermetic seals</em>.
+    </p>
+    <p class="story">
+      Three thousand years later, engineers stole the word and used it for something surprisingly similar. A <strong>hermetic build</strong> is a build that sees <em>exactly</em> what you declared and nothing else – no network, no stray system packages, no half-configured `$HOME` leaking in. Same inputs, same outputs, forever. And somewhere between the alchemist's flask and the CI pipeline, I realised these patterns map uncomfortably well onto how to live a life.
+    </p>
+  </section>
+
+  <!-- Local-only restrictions -->
+  <section aria-labelledby="local-heading">
+    <h2 id="local-heading">~ the beauty of local-only restrictions</h2>
+    <p class="story">
+      People hear "no network access" and think <em>limitation</em>. It's the opposite – it's <strong>honesty</strong>. A hermetic build stops lying to you. It can't quietly pull a dependency from the internet at 3 AM and pretend everything is fine. Every byte it consumes was written down somewhere, by someone, on purpose.
+    </p>
+    <p class="story">
+      There's something deeply calming about a process that cannot surprise you. In security we call this reducing the attack surface; in life the Stoics called it the <strong>inner citadel</strong> – Marcus Aurelius sealing his judgments away from things he couldn't control. You don't control the network. You control your inputs. Guard them like a build tool does.
+    </p>
+  </section>
+
+  <!-- Reproducibility -->
+  <section aria-labelledby="repro-heading">
+    <h2 id="repro-heading">~ reproducibility, or killing "works on my machine"</h2>
+    <p class="story">
+      <a href="https://bazel.build" rel="noopener noreferrer">Bazel</a> is Google's answer to a question that haunted large engineering orgs: <em>if two people run the same build on the same commit, why do they get different binaries?</em> Bazel's answer is hermeticity at scale – pin every toolchain, hash every input, cache every artifact. Run it on your laptop or a datacenter in Singapore, you get the same bits back. Bit. For. Bit.
+    </p>
+    <p class="story">
+      I've lost nights of my life to bugs that existed only on my machine. Flaky tests that pass in isolation and fail in CI. Every single one was an <strong>unsealed vessel</strong> – some hidden input nobody declared. Reproducibility isn't about speed. It's about being able to say: <span class="emphasis">given this exact set of circumstances, this outcome was inevitable.</span>
+    </p>
+  </section>
+
+  <!-- Declarativeness -->
+  <section aria-labelledby="declarative-heading">
+    <h2 id="declarative-heading">~ declarativeness and Starlark's discipline</h2>
+    <p class="story">
+      <a href="https://bazel.build/rules/language" rel="noopener noreferrer">Starlark</a> is the language Bazel files are written in, and it's Python's most disciplined cousin. No file I/O while evaluating. No randomness. No threads. You literally <em>cannot</em> be clever with it – only clear. You declare <strong>what you want</strong>, never <strong>how to get it</strong>. The build graph becomes a fact, not a procedure.
+    </p>
+    <p class="story">
+      This is where it stops being about code for me. The <a href="https://en.wikipedia.org/wiki/Karma_yoga" rel="noopener noreferrer">Bhagavad Gita</a> calls it <strong>nishkama karma</strong> – action without attachment to the fruits of action. Do your duty, declare your intent, and release your grip on the outcome. That's not passivity. That's the most declarative sentence ever written: <span class="emphasis">state the goal, surrender the execution.</span>
+    </p>
+  </section>
+
+  <!-- Nix -->
+  <section aria-labelledby="nix-heading">
+    <h2 id="nix-heading">~ nix: your whole OS as a pure function</h2>
+    <p class="story">
+      If Bazel hermeticises a project, <a href="https://nixos.org" rel="noopener noreferrer">Nix</a> hermeticises <em>existence itself</em>. Every package lives at a path hashed from its exact inputs in <code>/nix/store</code>. Upgrade breaks your setup? Roll back the entire machine like <code>git checkout</code> for reality. Your operating system stops being a pile of state accumulated over years and becomes a function you can evaluate again tomorrow and get today back.
+    </p>
+    <p class="story">
+      I switched my dotfiles over and the first thing I felt wasn't productivity. It was <strong>peace</strong>. Nothing on my system is accidental anymore. Everything that exists, exists because a file said it should.
+    </p>
+  </section>
+
+  <!-- Life & philosophies -->
+  <section aria-labelledby="life-heading">
+    <h2 id="life-heading">~ as above, so below: life as a hermetic build</h2>
+    <p class="story">
+      Here's the inversion that keeps me up at night (yes, past 02:00 AM, with coffee). Japan has a phrase, <strong>ichi-go ichi-e</strong> – "one time, one meeting." Every tea ceremony, every conversation, happens exactly once and can never be reproduced. Life is the one build that is <em>not</em> hermetic. You cannot pin the inputs. You cannot re-run it. The environment drifts every second whether you declared it or not.
+    </p>
+    <p class="story">
+      And that's precisely why the practices matter. The Stoics sealed their inputs – opinions, effort, judgment were theirs; reputation, outcomes, other people were not. Karma yoga declared the action and released the result. <strong>Memento mori</strong> is just the Romans reading the build logs: every input is finite, the final seal closes on all of us. Even <strong>wabi-sabi</strong> – the love of the cracked, unfinished thing – reads to me like making peace with a non-reproducible build instead of rage-quitting over it.
+    </p>
+    <p class="story">
+      Different cultures, thousands of years apart, arrived at the same design review: <span class="emphasis">control what enters the vessel. be deliberate about what you declare. accept what comes out.</span>
+    </p>
+  </section>
+
+  <!-- Closing -->
+  <section aria-labelledby="closing-heading">
+    <h2 id="closing-heading">~ the end?</h2>
+    <p class="story">
+      Hermes had it right three thousand years before CI pipelines. As above, so below: the sealed flask and the sealed self obey the same rule.
+    </p>
+    <p class="story">
+      <span class="emphasis">pin your inputs. release your outcomes.</span>
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <p>last updated: 2026‑08‑25</p>
+</footer>
+
+</body>
+</html>
