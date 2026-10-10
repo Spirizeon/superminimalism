@@ -65,8 +65,9 @@
     cursor: pointer;
   }
   #loader.done { opacity: 0; pointer-events: none; }
+  #loader { text-align: center; }
   #loader pre { margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; line-height: 1.2; letter-spacing: 0; white-space: pre; font-variant-ligatures: none; font-size: clamp(6px, 1.8vw, 12px); color: var(--fg-dim); }
-  #loader .loader-verb { color: var(--accent); font-size: 13px; letter-spacing: .14em; min-height: 1.6em; }
+  #loader .loader-verb { color: var(--accent); font-size: 12.5px; letter-spacing: .04em; line-height: 1.5; max-width: min(44ch, 88vw); min-height: 3em; text-wrap: balance; }
   #loader .loader-hint { color: var(--fg-dim); font-size: 12px; opacity: .6; }
 
   /* hero */
@@ -296,8 +297,8 @@
 <!-- ── loader: boot log ─────────────────────────────────────────────── -->
 <div id="loader" role="status" aria-label="loading">
   <pre id="mz0" role="img" aria-label="the mandelbrot set, zooming"></pre>
-  <div id="loader-verb" class="loader-verb" aria-hidden="true">calculating…</div>
-  <div class="loader-hint">click to skip</div>
+  <div id="loader-verb" class="loader-verb" aria-hidden="true">nah, i'd win.</div>
+  <div class="loader-hint">gojo satoru · click to skip</div>
 </div>
 
 <script type="module" src="https://ascii.rest/ascii.js"></script>
@@ -574,14 +575,25 @@ $("#year").textContent = new Date().getFullYear();
   const loader = $("#loader");
   if (!loader) return;
   const verb = $("#loader-verb");
-  const VERBS = ["calculating", "iterating", "zooming", "escaping", "rendering", "sampling", "converging"];
+  const QUOTES = [
+    "nah, i'd win.",
+    "throughout heaven and earth, i alone am the honored one.",
+    "because you're weak.",
+    "love is the most twisted curse of all.",
+    "you cryin'?",
+    "domain expansion — unlimited void.",
+    "my six eyes tell me you're geto, but my soul knows otherwise.",
+    "i'm going to raise strong jujutsu sorcerers.",
+    "the absolute strongest. the loneliness that follows.",
+    "alright — i get it now. this is hell.",
+  ];
   let verbTimer = null;
   if (verb) {
-    let vi = 0;
+    let qi = 0;
     verbTimer = setInterval(() => {
-      vi = (vi + 1) % VERBS.length;
-      verb.textContent = VERBS[vi] + "…";
-    }, 650);
+      qi = (qi + 1) % QUOTES.length;
+      verb.textContent = QUOTES[qi];
+    }, 140); // a blur of quotes, like the fractal above it
   }
   let gone = false;
   const hide = () => {
