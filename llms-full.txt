@@ -1,36 +1,44 @@
 # Ayush Dutta - Security Researcher & Developer
 
-> 22-year-old security researcher and developer. GitHub Campus Expert, Keploy API Fellow, OffSec bounty hunter. Building accessible security education through MagmaCore and Cylynk. Zero-JS portfolio at berzi.one.
+> Security researcher & developer. Platform & security at Atlan, Linux Foundation LFX'26 mentee at Magma. NixOS, agentic harnesses, reproducible machines, accessible security. Zero-JS portfolio drawn with ascii.rest at berzi.one.
 
 ## Personal Introduction
 
 Yes, I'm Ayush Dutta and you will love this story.
 
-Once, a 22-year-old kid decided he wanted to understand how things break. Not to break them for bad, but to learn how to fix them even better.
+Once, a kid decided he wanted to understand how things break. Not to break them for bad, but to learn how to fix them even better.
 
-Now I spend my days at MagmaCore as an open source mentee through the Linux Foundation, building the future of telecom. By night (and sometimes by day), I help build accessible security education at Cylynk in Melbourne. Because learning shouldn't cost a fortune.
+Now I spend my days at Atlan, on platform and security, in an environment that introduced me to problems and tools I could not have reached on my own. And I contribute to Magma through the Linux Foundation, an open source mentee working on the future of telecom.
 
 My philosophy is simple: Don't tell me your title, show me your work.
 
 ## Chapter 1: The Breaking
 
-It started with curiosity. I wanted to know what makes systems fail. So I built vulnerable labs for OSMsec. Real ones, with real exploits. Thousands of people use them to learn. I wrote proof-of-concepts that ended up on OffSec and HackTheBox.
+It started with curiosity. I wanted to know what makes systems fail.
 
-Then I wondered: What if we could automate finding bugs? So I built LemonX. A system where AI agents test and fix code together, running entirely on GitHub action runners. Zero compute cost, maximum utility.
+My first industry internship came from breaking into a startup's admin panel. The founder was kind enough to let me intern, find, report and fix more bugs in their products. Then I worked for a consultancy building hackable environments sold to clients like OffSec and HackTheBox, analysing CVEs and 0days, packaging them into VMs and testing them on Proxmox.
 
 ## Chapter 2: The Building
 
 While all this breaking was happening, I started building too.
 
-**densezk**: A mobile-first zero-knowledge proof SDK that achieves 17x performance boost over existing solutions. Rust, React Native, Circom. Because privacy shouldn't be slow.
+**lemonx**: An agentic AI testing platform that autonomously generates, executes and fixes unit, integration and E2E tests for TypeScript/JavaScript codebases. Runs on GitHub Actions.
 
-**lumen**: An LLM-assisted malware analysis framework that automates 90% of static analysis tasks. 150+ people have used it.
+**yuki-code**: A Nix-based harness for reproducible agent sessions, so an AI engineering team's environment is a function you can evaluate again tomorrow.
 
-**dialga**: A version control system in Rust. Started as learning, became useful.
+**berzinix**: A fully-declarative NixOS setup on flakes and home-manager, running Hyprland on an NVIDIA GPU. Nothing on my machine is accidental.
+
+**agentic-aeo-skills**: An LLM-first AEO analysis skillset with 6 specialized sub-skills, 6 specialist agents and evidence-collecting utility scripts, compatible with Codex, Claude, Gemini and OpenCode.
+
+**hackfish**: Swarm intelligence to predict your next hackathon winning project.
+
+**shovel**: A memory-efficient, fast web crawler written with goroutines.
+
+Most of these are experiments built from niche technology, or built to prove a point that it can be done.
 
 ## Chapter 3: The Leading
 
-I believe the best security education is accessible. That's why I built certification courses at Cylynk for people who can't afford expensive training.
+I believe the best security education is accessible. I do all kinds of community work to help people get started with cybersecurity as easily as possible.
 
 I founded Google Developer Groups at my campus. Grew from zero to 1100 members in 9 months.
 
@@ -42,11 +50,11 @@ I advise for FOSS United, AWS Cloud Club, and Hackshastra.
 
 I don't collect degrees. I collect proof.
 
-- **GitHub Campus Expert** — 2% global acceptance
-- **Keploy API Fellowship** — 5.4% acceptance  
-- **OffSec Bounty Hunter** — received bounty from OffSec
-
 Currently pursuing B.Tech at SRM University-AP. The classroom taught me the least. What mattered most was showing up to different communities.
+
+- Linux Foundation Mentorship (LFX'26) at Magma
+- GitHub Pull Shark x2, YOLO, Quickdraw, Public Sponsor
+- 220+ GitHub followers
 
 ## Contact
 
@@ -56,15 +64,16 @@ Currently pursuing B.Tech at SRM University-AP. The classroom taught me the leas
 - **X (Twitter)**: [https://x.com/berzelion](https://x.com/berzelion)
 - **Blog**: [https://blog.berzi.one](https://blog.berzi.one)
 - **Portfolio**: [https://berzi.one](https://berzi.one)
+- **Book a call**: [https://cal.com/berzi](https://cal.com/berzi)
 
 ## Skills & Expertise
 
-Cybersecurity, Penetration Testing, Bug Bounty Hunting, Zero-Knowledge Proofs, Rust Programming, Web Security, Malware Analysis, Security Education, Open Source Development, LLM Applications, GitHub Actions, Community Building
+Cybersecurity, Penetration Testing, Bug Bounty Hunting, NixOS, Nix, Reproducible Builds, Declarative Configuration, Rust Programming, Go, TypeScript, Python, Web Security, Malware Analysis, AI Agents, Agent Skills, GitHub Actions, Open Source Development, Community Building
 
 ## Achievements
 
-- Founded Google Developer Groups (1100+ members, 9 months)
 - Lead at Next Tech Lab (QS Reimagine Education award, since 2017)
+- Founded Google Developer Groups (1100+ members, 9 months)
+- Founding Lead and Community Architect, Google Dev Groups
 - Advisor at FOSS United, AWS Cloud Club, Hackshastra
-- Created OSMsec vulnerable labs used by thousands globally
-- Built LemonX - AI-driven bug detection using GitHub Actions
+- Linux Foundation Mentorship (LFX'26) at Magma

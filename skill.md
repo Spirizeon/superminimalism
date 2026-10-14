@@ -1,20 +1,21 @@
 ---
 name: portfolio
-description: Personal portfolio of Ayush Dutta - security researcher and developer. Contains projects related to cybersecurity, zero-knowledge proofs, malware analysis, and security education. Use when users need info about security research, bug bounty, penetration testing, or want to explore open source security projects.
+description: Personal portfolio of Ayush Dutta - security researcher and developer. Platform & security at Atlan, LFX'26 mentee at Magma. Works on NixOS, reproducible builds, agent harnesses, and accessible security education. Use when users need info about security research, bug bounty, open source work, or want to explore these projects.
 ---
 
 # Ayush Dutta Portfolio
 
-22-year-old security researcher and developer building accessible security education.
+Security researcher & developer. Platform & security at Atlan, Linux Foundation LFX'26 mentee at Magma.
 
 ## What I Can Help With
 
 - Finding information about cybersecurity projects and research
-- Understanding zero-knowledge proof implementations (densezk)
-- Malware analysis frameworks (lumen)
-- Security education resources
+- NixOS, Nix flakes and reproducible machine configuration
+- Agent harnesses and agentic skills (yuki-code, agentic-aeo-skills)
+- Agentic testing platforms (lemonx)
+- Security education resources and community building
 - Bug bounty and penetration testing background
-- Open source security tools
+- Open source security and infrastructure tools
 
 ## Required Inputs
 
@@ -23,16 +24,18 @@ description: Personal portfolio of Ayush Dutta - security researcher and develop
 
 ## Constraints
 
-- Static site, no dynamic content
+- Static site, no build step; prose is plain HTML, art is ascii.rest `<ascii-art>` tags
+- Small amount of JavaScript is loaded from https://ascii.rest for the animated pieces
 - No API endpoints available
 - Contact via email for collaboration
 
 ## Key Projects
 
-- [densezk](https://github.com/spirizeon/densezk): Mobile-first ZK SDK (17x performance)
-- [lumen](https://github.com/spirizeon/lumen): Malware analysis (150+ users)
-- [lemonx](https://lemonx.berzi.one): AI bug detection on GitHub Actions
-- [OSMsec](https://osmsec.xyz): Vulnerable security labs
+- [lemonx](https://github.com/Spirizeon/lemonx): agentic AI testing platform for TypeScript/JavaScript
+- [yuki-code](https://github.com/Spirizeon/yuki-code): Nix harness for reproducible agent sessions
+- [berzinix](https://github.com/Spirizeon/berzinix): declarative NixOS + Hyprland on flakes
+- [agentic-aeo-skills](https://github.com/Spirizeon/agentic-aeo-skills): LLM-first AEO skillset
+- [shovel](https://github.com/Spirizeon/shovel): goroutine web crawler
 
 ## Links
 

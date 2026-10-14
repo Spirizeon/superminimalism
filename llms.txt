@@ -1,25 +1,25 @@
 # Ayush Dutta - Security Researcher & Developer
 
-> 22-year-old security researcher and developer. GitHub Campus Expert, Keploy API Fellow, OffSec bounty hunter. Building accessible security education through MagmaCore and Cylynk. Zero-JS portfolio at berzi.one.
+> Security researcher & developer. Platform & security at Atlan, Linux Foundation LFX'26 mentee at Magma. NixOS, agentic harnesses, reproducible machines, accessible security. Zero-JS portfolio drawn with ascii.rest at berzi.one.
 
 ## About
 
-Passionate about cybersecurity, penetration testing, and making security education accessible to everyone. GitHub Campus Expert (2% global acceptance), Keploy API Fellow (5.4% acceptance), and OffSec bounty hunter.
+Passionate about cybersecurity, agentic engineering and making security education accessible. I work on platform and security at Atlan, and contribute to Magma through the Linux Foundation mentorship. I ship every few days on GitHub, mostly experiments built from niche technology, or to prove a point that it can be done.
 
 ## Projects
 
-- [densezk](https://github.com/spirizeon/densezk): Mobile-first zero-knowledge proof SDK achieving 17x performance boost
-- [lumen](https://github.com/spirizeon/lumen): LLM-assisted malware analysis framework (150+ users)
-- [dialga](https://github.com/spirizeon/dialga): Version control system in Rust
-- [lemonx](https://lemonx.berzi.one): AI agents for automated bug finding and fixing
-- [OSMsec](https://osmsec.xyz): Vulnerable security labs with real exploits for learning
-- [LemonX](https://lemonx.berzi.one): AI-driven bug detection using GitHub Actions
+- [lemonx](https://github.com/Spirizeon/lemonx): agentic AI testing platform that generates, executes and fixes unit, integration and E2E tests for TypeScript/JavaScript codebases
+- [yuki-code](https://github.com/Spirizeon/yuki-code): Nix-based harness for reproducible agent sessions for AI engineering teams
+- [berzinix](https://github.com/Spirizeon/berzinix): fully-declarative NixOS + Hyprland config on flakes and home-manager, NVIDIA GPU
+- [agentic-aeo-skills](https://github.com/Spirizeon/agentic-aeo-skills): LLM-first AEO analysis skillset with 6 specialized sub-skills and 6 specialist agents
+- [hackfish](https://github.com/Spirizeon/hackfish): swarm intelligence to predict your next hackathon winning project
+- [shovel](https://github.com/Spirizeon/shovel): memory-efficient, fast web crawler using goroutines
+- [superminimalism](https://github.com/Spirizeon/superminimalism): the portfolio site you are reading, hand-written HTML drawn with ascii.rest
 
 ## Work Experience
 
-- [MagmaCore](https://magmacore.io): Open source mentee through Linux Foundation, building future of telecom
-- [Cylynk](https://cylynk.com/): Building accessible security education in Melbourne
-- [OSMsec](https://osmsec.xyz): Created vulnerable labs used by thousands
+- [Atlan](https://atlan.com): Platform & security intern, AI-driven data governance platform
+- [Magma](https://github.com/magma): Open source mentee through the Linux Foundation (LFX'26)
 
 ## Education
 
@@ -27,28 +27,28 @@ Passionate about cybersecurity, penetration testing, and making security educati
 
 ## Skills
 
-Cybersecurity, Penetration Testing, Bug Bounty, Zero-Knowledge Proofs, Rust, Web Security, Malware Analysis, Security Education, LLM Applications, GitHub Actions
+Cybersecurity, Penetration Testing, Bug Bounty, NixOS, Nix, Reproducible Builds, Declarative Configuration, Rust, Go, TypeScript, Python, Web Security, Malware Analysis, AI Agents, Agent Skills, GitHub Actions, Developer Relations, Security Education, Community Building
 
 ## Links
 
 - [Portfolio](https://berzi.one/): Personal website and portfolio
-- [Blog](https://blog.berzi.one/): Technical blog with security research
+- [Blog](https://blog.berzi.one/): Technical blog
 - [GitHub](https://github.com/spirizeon): Open source projects
 - [LinkedIn](https://linkedin.com/in/ayushduttasrmap): Professional profile
 - [Twitter/X](https://x.com/berzelion): Personal account
 - [Email](mailto:dutta_ayush@srmap.edu.in): Contact email
-- [MagmaCore](https://magmacore.io): Linux Foundation open source
-- [Cylynk](https://cylynk.com/): Security education platform
-- [Next Tech Lab](https://nexttechlabap.in): QS Awarded student society
-- [FOSS United](https://fossunited.org): Open source advocacy
-
-## Certifications & Achievements
-
-- [GitHub Campus Expert](https://github.com/campus-experts): 2% acceptance globally
-- [Keploy API Fellowship](https://keploy.io): 5.4% acceptance
-- [OffSec](https://offensive-security.com): Bounty hunter
-- [Google Developer Groups](https://gdg.community.dev): Founded chapter (1100+ members)
-- [Next Tech Lab](https://nexttechlabap.in): QS Reimagine Education award
-- [FOSS United](https://fossunited.org): Advisor
+- [Next Tech Lab](https://nexttechlabap.in): QS Awarded student society, which I lead
+- [Google Developer Groups](https://gdg.community.dev/gdg-on-campus-srm-university-ap-amaravati-india/): Chapter I founded
+- [FOSS United](https://fossunited.org/c/srm-university-ap): Advisor
 - [AWS Cloud Club](https://www.meetup.com/aws-cloud-club-at-srm-university-andhra-pradesh/): Advisor
-- [Hackshastra](https://www.hackshastrasrmuap.dev/): Security event organizer
+- [Hackshastra](https://www.hackshastrasrmuap.dev/): Student Advisor
+
+## Community & Achievements
+
+- Lead, Next Tech Lab - QS Reimagine Education award, student society running since 2017
+- Founder, Google Developer Groups at SRM University-AP - zero to 1100 members in 9 months
+- Founding Lead and Community Architect, Google Dev Groups
+- Student Advisor, FOSS United, AWS Cloud Clubs and Hackshastra
+- Linux Foundation Mentorship (LFX'26) at Magma
+- Pull Shark x2, YOLO, Quickdraw, Public Sponsor on GitHub
+- 220+ GitHub followers

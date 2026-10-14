@@ -3,11 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>spirizeon — security researcher & developer</title>
+<title>ayush dutta</title>
 <meta name="description" content="Ayush Dutta — security researcher & developer. One HTML file of animated ascii, no build step.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>%E2%96%93</text></svg>">
 <style>
   :root {
+    --gap: 16px; /* the one space between two pieces of text on the page */
+    /* the one column every line of text on the page sits in. rem, not ch: ch is
+       resolved against each element's own font size, so a 12 px credit and a
+       14 px form came out narrower than the 15 px prose beside them. */
+    --measure: 35rem;
     --bg: #0a0a0a;
     --bg-soft: #101010;
     --fg: #d6d6d6;
@@ -49,15 +54,17 @@
   }
   .sec::before { content: "[ "; }
   .sec::after  { content: " ]"; }
-  .caption { color: var(--fg-dim); font-size: 12.5px; margin: 10px 0 0; }
+  .caption { max-width: var(--measure); margin-inline: auto; color: var(--fg-dim); font-size: 12.5px; }
 
   /* loader */
   #loader {
     position: fixed;
     inset: 0;
+    width: 100vw;
+    height: 100vh;
     z-index: 100;
     display: grid;
-    place-content: center;
+    grid-template-rows: 1fr auto;
     justify-items: center;
     gap: 18px;
     background: var(--bg);
@@ -66,8 +73,9 @@
   }
   #loader.done { opacity: 0; pointer-events: none; }
   #loader { text-align: center; }
-  #loader pre { margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; line-height: 1.2; letter-spacing: 0; white-space: pre; font-variant-ligatures: none; font-size: clamp(6px, 1.8vw, 12px); color: var(--fg-dim); }
-  #loader .loader-verb { color: var(--accent); font-size: 12.5px; letter-spacing: .04em; line-height: 1.5; max-width: min(44ch, 88vw); min-height: 3em; text-wrap: balance; }
+  #loader .lz-wrap { flex: 1 1 auto; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  #loader pre { margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; line-height: 1.2; letter-spacing: 0; white-space: pre; font-variant-ligatures: none; font-size: 8px; color: var(--fg-dim); }
+  #loader .loader-verb { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(90vw, 24ch); text-align: center; z-index: 2; color: var(--accent); font-size: 50px; letter-spacing: .04em; line-height: 1.15; min-height: 1.15em; text-wrap: balance; }
   #loader .loader-hint { color: var(--fg-dim); font-size: 12px; opacity: .6; }
 
   /* hero */
@@ -78,13 +86,16 @@
   .tagline { color: var(--fg-dim); font-size: 13px; margin: 12px 0 0; letter-spacing: .18em; }
 
   /* about */
-  .about p:not(.prose) { margin: 0 0 12px; }
   .links { color: var(--fg-dim); }
   .links a { color: var(--fg); border-bottom: 1px solid var(--line); }
   .links a:hover { color: var(--accent); text-decoration: none; }
+  /* the index under the banner: same [ word ] look, brackets drawn rather than
+     typed, so the labels can stay short and the row stays one line */
+  .links.index a { display: inline-block; margin: 2px 5px; }
+  .links.index a::before { content: "[ "; color: var(--fg-dim); }
+  .links.index a::after { content: " ]"; color: var(--fg-dim); }
 
-  .prose { max-width: 62ch; margin: 16px auto 0; text-align: center; }
-  .prose + .prose { margin-top: 12px; }
+  .prose { max-width: var(--measure); text-align: center; }
 
   /* music */
   .music { position: relative; }
@@ -107,14 +118,6 @@
   .spotify { position: absolute; left: 0; width: min(320px, 100%); height: 80px; overflow: hidden; opacity: 0; pointer-events: none; }
   .spotify iframe { border-radius: 10px; }
 
-  /* load timing bars + data */
-  .loadbox { max-width: 560px; margin: 0 auto; text-align: left; }
-  .loadbox pre { margin: 0; font-size: clamp(11px, 2.2vw, 14px); line-height: 1.7; overflow-x: auto; }
-  .loadbox .l { color: var(--fg-dim); }
-  .loadbox .b { color: var(--fg); }
-  .loadbox .ms { color: var(--fg); font-variant-numeric: tabular-nums; }
-  .loadbox .p { color: var(--fg-dim); font-variant-numeric: tabular-nums; }
-  .loadbox .ttl { color: var(--accent); font-weight: 700; }
   .dim { color: var(--fg-dim); }
   .heatmap {
     font-size: clamp(6px, 1.35vw, 11px);
@@ -132,32 +135,31 @@
   /* logos */
   .logo-row { display: flex; flex-wrap: wrap; gap: 22px; align-items: flex-end; justify-content: center; }
   .logo-row ascii-art { width: 120px; }
-  .logo-row figcaption { font-size: 12px; color: var(--fg-dim); margin-top: 6px; text-align: center; }
   .logo-row figure { margin: 0; }
+  .logo-row figcaption { font-size: 12px; color: var(--fg-dim); margin-top: 6px; text-align: center; }
+  .logo-row figcaption { visibility: hidden; }
 
   /* spacer */
   .spacer { height: 0; }
 
   /* footer */
-  footer { border-top: 1px solid var(--line); margin-top: 28px; padding-top: 8px; }
-  .status-line { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 13.5px; flex-wrap: wrap; }
+  footer { margin-top: 28px; padding-top: 8px; }
+  .status-line { display: flex; align-items: center; justify-content: center; gap: 10px; max-width: var(--measure); margin-inline: auto; font-size: 13.5px; flex-wrap: wrap; }
   .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--fg-dim); flex: none; }
   .dot.good { background: var(--good); box-shadow: 0 0 8px var(--good); }
   .dot.warn { background: var(--warn); box-shadow: 0 0 8px var(--warn); }
   .dot.bad  { background: var(--bad);  box-shadow: 0 0 8px var(--bad); }
   .status-line .muted { color: var(--fg-dim); }
-  .big-ascii ascii-art, footer ascii-art { font-size: clamp(6px, 1.4vw, 12px); }
-  footer ascii-art { overflow-x: auto; }
-  .credit { color: var(--fg-dim); font-size: 12px; margin: 6px 0 0; }
+  .big-ascii ascii-art { font-size: clamp(6px, 1.4vw, 12px); }
+  .credit { max-width: var(--measure); margin-inline: auto; color: var(--fg-dim); font-size: 12px; }
 
   /* say hello: terminal window form, in the style of the form-controls art */
-  .term-form { max-width: 520px; margin: 0 auto; text-align: left; font-size: 14px; }
+  .term-form { max-width: var(--measure); margin: 0 auto; text-align: left; font-size: 14px; }
   .ttitle {
     text-align: center;
     color: var(--fg-dim);
     font-size: 12.5px;
     letter-spacing: .12em;
-    border-bottom: 1px solid var(--line);
     padding: 7px 0;
   }
   .tbody { padding: 16px 18px 4px; }
@@ -205,19 +207,68 @@
     color: var(--fg-dim);
     font-size: 12px;
     letter-spacing: .06em;
-    border-top: 1px solid var(--line);
     padding: 7px 0;
   }
   @media (max-width: 560px) { .trow { grid-template-columns: 1fr; gap: 4px; } }
 
-  /* maze */
-  .maze-wrap { display: inline-block; text-align: left; max-width: 100%; overflow-x: auto; }
-  .maze-wrap ascii-art { font-size: clamp(6px, 1.35vw, 11px); line-height: 1.15; }
+  /* harmonograph */
+  .hgraph { display: inline-block; text-align: left; max-width: 100%; overflow-x: auto; }
+  .hgraph ascii-art { font-size: clamp(6px, 1.35vw, 11px); line-height: 1.15; }
+  .hgraph #frcurve { margin: 0; font-family: var(--mono); line-height: 1.15; white-space: pre; text-align: left; font-size: clamp(4.5px, 1.15vw, 9.5px); }
+
+
+
+  /* ── figures and notes ───────────────────────────────────────────────
+     one flow, one component: every block is a figure — title, art, caption,
+     at most one paragraph — so a picture and its explanation can't drift
+     apart. a note is prose on its own. captions and paragraphs sit at a
+     readable measure on the left instead of fighting the centred art. */
+  /* the rhythm: siblings inside a block are one gap apart, nothing else. the
+     reset below is wrapped in :where so it carries no specificity and cannot
+     outrank this rule — that was quietly killing the gap under every figure. */
+  :where(.prose, .caption, .credit, .links, .status-line, .thint) { margin: 0; }
+  .fig > * + *, .note > * + *, footer > * + *, main > * + * { margin-top: var(--gap); }
+  .credit + .credit { margin-top: 6px; }
+
+  .fig { margin: 0 0 34px; }
+  .fig > .sec, .sec.unlabelled { display: none; }
+  /* a figure's own paragraph is centred in the figure, at the same measure and
+     in the same place a note's paragraph sits, rather than hanging off the left
+     edge at a width of its own */
+  .fig > .prose { text-align: center; max-width: var(--measure); margin-inline: auto; }
+
+  /* prose on its own, one rule between entries */
+  .note { max-width: var(--measure); margin: 0 auto; padding: calc(var(--gap) * 1.5) 0; }
+  .note > .prose { text-align: center; }
+
+  /* ── the rune dividers ───────────────────────────────────────────────
+     between five blocks sits a row of cuneiform signs. each row is a letter for
+     letter encoding of one of gojo's lines: the glyphs are a substitution, and
+     the line rides along in the title and the accessible name, so it reads back
+     out on hover and to anything that cannot see the signs. */
+  .runes {
+    display: flex;
+    justify-content: center;
+    max-width: var(--measure);
+    margin: calc(var(--gap) * 1.6) auto;
+    color: var(--fg-dim);
+    font-size: 13px; /* one size for every row, so the five read as one hand */
+    line-height: 1;
+    letter-spacing: .12em;
+    opacity: .55;
+    cursor: help;
+    transition: opacity .35s ease, color .35s ease;
+  }
+  .runes span { max-width: 100%; text-align: center; overflow-wrap: anywhere; }
+  .runes:hover, .runes:focus-visible { opacity: 1; color: var(--accent); }
+  .runes:focus-visible { outline: 1px dashed var(--accent); outline-offset: 6px; }
+
+  /* the socials row at the very end, and its copy in the footer */
+  footer .foot-links { margin: 22px 0 0; }
 
   /* blog faq: expandable post list */
-  .faq { max-width: 560px; margin: 0 auto; text-align: left; border: 1px solid var(--line); border-radius: 8px; }
-  details.blog-item { border-bottom: 1px solid var(--line); }
-  details.blog-item:last-child { border-bottom: 0; }
+  .faq { max-width: var(--measure); margin: 0 auto; text-align: left; }
+  details.blog-item { padding: 2px 0; }
   details.blog-item[open] { background: var(--bg-soft); }
   summary.blog-t {
     list-style: none;
@@ -247,14 +298,14 @@
      instead of dragging the page sideways, and stays centred while it fits —
      `safe` keeps the start edge reachable once it overflows. */
   main { overflow-x: clip; }
-  .maze-wrap, .big-ascii, #gh, .loadbox, footer ascii-art, .hero .scene {
+  .hgraph, .big-ascii, #gh, .hero .scene {
     display: flex;
     justify-content: safe center;
     max-width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
-  .maze-wrap > *, .big-ascii > *, #gh > *, .loadbox > * { flex: 0 0 auto; min-width: min-content; }
+  .hgraph > *, .big-ascii > *, #gh > * { flex: 0 0 auto; min-width: min-content; }
   .big-ascii ascii-art { min-width: min-content; }
 
   @media (max-width: 560px) {
@@ -271,7 +322,7 @@
     .track { width: 100%; white-space: normal; }
     .eq { flex-basis: 100%; order: 3; }
     .heatmap { font-size: 5px; }
-    .maze-wrap ascii-art { font-size: 5px; }
+    .hgraph ascii-art { font-size: 5px; }
     .term-form .trow { grid-template-columns: 1fr; gap: 4px; }
     .ttitle, .thint { font-size: 11.5px; }
     .links { font-size: 13px; line-height: 2; }
@@ -296,7 +347,7 @@
 
 <!-- ── loader: boot log ─────────────────────────────────────────────── -->
 <div id="loader" role="status" aria-label="loading">
-  <pre id="mz0" role="img" aria-label="the mandelbrot set, zooming"></pre>
+  <div class="lz-wrap"><pre id="lz0" role="img" aria-label="a lorenz attractor, spinning fast"></pre></div>
   <div id="loader-verb" class="loader-verb" aria-hidden="true">nah, i'd win.</div>
   <div class="loader-hint">gojo satoru · click to skip</div>
 </div>
@@ -304,22 +355,22 @@
 <script type="module" src="https://ascii.rest/ascii.js"></script>
 
 <main>
-  <!-- ── header: denji & power, sampled from images.jpg ────────────── -->
+  <!-- ── header: the hero scene, sampled from the clip ────────────────── -->
   <header class="hero">
-    <ascii-art class="scene" id="poster-scene" label="denji and power mid-swing, the chainsaw drawn across the blast">denji and power, mid-swing</ascii-art>
+    <ascii-art class="scene" id="poster-scene" label="gojo and sukuna side by side, drawn in ascii">gojo and sukuna</ascii-art>
     <div class="hero-text">
       <ascii-banner text="'Nah, I'd Win'" color="#7ee787" shadow="rounded"></ascii-banner>
       <p class="tagline">security as a hobby, devops for the bills, coffee as a life</p>
-<p class="links">[ <a href="https://github.com/spirizeon">github</a> ]
-      [ <a href="https://x.com/berzelion">x</a> ]
-      [ <a href="https://blog.berzi.one">blog</a> ]
-      [ <a href="https://linkedin.com/in/ayushduttasrmap">linkedin</a> ]
-      [ <a href="#music">listen</a> ] [ <a href="#tools">tools</a> ]</p>
-
+      <nav aria-label="index"><p class="links index"><a href="#music">listen</a>
+        <a href="#tools">tools</a>
+        <a href="#contrib">code</a>
+        <a href="#blog">blog</a>
+        <a href="#hello">contact</a></p></nav>
     </div>
   </header>
+
   <!-- ── music player bar ──────────────────────────────────────────── -->
-  <section class="music" id="music">
+  <div class="fig music" id="music" aria-label="read while playing">
     <h2 class="sec">read while playing!</h2>
     <div class="player">
       <button id="play" class="tbtn accent" type="button" aria-pressed="false">[ ▶ play ]</button>
@@ -330,45 +381,62 @@
     <div class="spotify" aria-hidden="true">
       <div id="embed-spotify"></div>
     </div>
-    <p class="caption" id="spot-note">the playlist starts on load where autoplay is allowed — otherwise hit <b>[ play ]</b>.</p>
-      </section>
+  </div>
 
   <!-- ── prose: the breaking ──────────────────────────────────────── -->
-  <div class="about" id="about">
+  <div class="note" id="about">
     <p class="prose">my name is <strong>AYUSH DUTTA</strong>. i'm 22, and i decided i wanted to
        understand how things break, not to break them for bad, but to learn how to fix them even
        better. welcome to my whimsical website</p>
   </div>
+  <div class="runes" role="separator" title="nah, i'd win." aria-label="gojo: nah, i'd win."><span aria-hidden="true">𒁱𒀆𒁁𒀈𒀹𒁄𒂭𒀍𒀹𒄘𒁄𒁱𒂍</span></div>
 
-
-  <!-- ── load time (realtime) ───────────────────────────────────────── -->
-  <section class="load" id="speed">
-    <h2 class="sec">how fast this page loads</h2>
-    <div class="loadbox">
-      <pre id="loadpre">measuring…</pre>
+  <!-- ── frequency response ────────────────────────────────────────── -->
+  <div class="fig" id="fr" aria-label="frequency response">
+    <h2 class="sec">frequency response</h2>
+    <div class="big-ascii">
+      <div class="hgraph">
+        <pre id="frcurve" role="img" aria-label="frequency response of the moondrop space travel 2 ultra, left and right channels, from 20 hertz to 20 kilohertz"></pre>
+      </div>
     </div>
-    <p class="caption">measured live in <em>your</em> browser with the navigation timing api.<br>
-       each bar is one stage of the page load, drawn against a fixed 2000 ms budget — refresh to re-measure.</p>
-  </section>
+    <p class="prose">i love listening to music of all kinds, languages and it directly correlates to
+       tech. this graph above is what you call a harman target curve (highlight), this is the sound
+       profile for my own earbuds, pretty cool right?</p>
+  </div>
+  <div class="runes" role="separator" title="you cryin'?" aria-label="gojo: you cryin'?"><span aria-hidden="true">𒄙𒂈𒃸𒀹𒀈𒂡𒄙𒁄𒁱𒂭𒂎</span></div>
 
-  <!-- ── github heatmap (realtime) ─────────────────────────────────── -->
-  <section class="heat" id="contrib">
-    <h2 class="sec">github · @spirizeon</h2>
-    <div id="gh">
-      <pre id="gh-pre" class="heatmap" aria-label="github contribution graph">loading contributions…</pre>
-      <ascii-art id="gh-fallback" piece="heatmap" hidden>contribution calendar</ascii-art>
-    </div>
-    <p class="caption" id="gh-total">fetching live stats from github…</p>
-
-
-
-<p class="prose">i got my first internship by breaking into a startup's admin panel. the founder
+  <!-- ── prose: how it started ─────────────────────────────────────── -->
+  <div class="note">
+    <p class="prose">i got my first internship by breaking into a startup's admin panel. the founder
        was kind enough to let me stay and find, report and fix more bugs. since then i've built
        hackable environments for a consultancy serving <a href="https://www.offsec.com">offsec</a> and
        <a href="https://www.hackthebox.com">hackthebox</a>, analysed
        <a href="https://cve.mitre.org">cves</a> and 0-days, and packed them into VMs on
        <a href="https://www.proxmox.com">proxmox</a>.</p>
+  </div>
 
+  <!-- ── language logos ────────────────────────────────────────────── -->
+  <div class="fig" id="tools" aria-label="tools">
+    <h2 class="sec">tools</h2>
+    <div class="logo-row">
+      <figure><ascii-art piece="nixos" label="nixos logo">nixos</ascii-art><figcaption>nixos</figcaption></figure>
+      <figure><ascii-art piece="rust" label="rust logo">rust</ascii-art><figcaption>rust</figcaption></figure>
+      <figure><ascii-art piece="cpp" label="c++ logo">c++</ascii-art><figcaption>c++</figcaption></figure>
+      <figure><ascii-art piece="go" label="go logo">go</ascii-art><figcaption>go</figcaption></figure>
+    </div>
+  </div>
+
+  <!-- ── github heatmap (realtime) ────────────────────────────────── -->
+  <div class="fig" id="contrib" aria-label="github · @spirizeon">
+    <h2 class="sec">github · @spirizeon</h2>
+    <div id="gh">
+      <pre id="gh-pre" class="heatmap" aria-label="github contribution graph">loading contributions…</pre>
+      <ascii-art id="gh-fallback" piece="heatmap" hidden>contribution calendar</ascii-art>
+    </div>
+  </div>
+
+  <!-- ── prose: the graph is the receipt ───────────────────────────── -->
+  <div class="note">
     <p class="prose">that graph is the receipt. i've been on the founding team of four tech clubs at
        my university — i scaled
        <a href="https://gdg.community.dev/gdg-on-campus-srm-university-ap-amaravati-india/">google developer groups</a>
@@ -377,74 +445,27 @@
        <a href="https://fossunited.org/c/srm-university-ap">foss united</a>,
        <a href="https://www.meetup.com/aws-cloud-club-at-srm-university-andhra-pradesh/">aws cloud club</a> and
        <a href="https://www.hackshastrasrmuap.dev/">hackshastra</a>.</p>
-  </section>
+  </div>
+  <div class="runes" role="separator" title="because you're weak." aria-label="gojo: because you're weak."><span aria-hidden="true">𒀇𒀫𒀈𒀆𒃸𒂭𒀫𒀹𒄙𒂈𒃸𒂭𒂡𒀫𒀹𒄘𒀫𒀆𒁑𒂍</span></div>
 
-  <!-- ── language logos ────────────────────────────────────────────── -->
-  <section class="logos" id="tools">
-    <h2 class="sec">tools</h2>
-    <div class="logo-row">
-      <figure><ascii-art piece="nixos" label="nixos logo">nixos</ascii-art><figcaption>nixos</figcaption></figure>
-      <figure><ascii-art piece="rust" label="rust logo">rust</ascii-art><figcaption>rust</figcaption></figure>
-      <figure><ascii-art piece="cpp" label="c++ logo">c++</ascii-art><figcaption>c++</figcaption></figure>
-      <figure><ascii-art piece="go" label="go logo">go</ascii-art><figcaption>go</figcaption></figure>
-    </div>
+  <div class="note">
     <p class="prose">don't tell me your title, show me your work. this site was built with functionality
        before visuals. i enjoy programming as a hobby — sometimes it's agents (btw, this page was built
        with opencode), sometimes it's as confusing as malware reverse engineering, and always a little
        coffee-fuelled.</p>
-  </section>
-
-  <!-- ── maze ─────────────────────────────────────────────────────── -->
-  <section class="maze-sec" id="maze">
-    <h2 class="sec">maze</h2>
-    <div class="big-ascii">
-      <div class="maze-wrap">
-        <ascii-art piece="maze" label="a maze carved by backtracking, then solved, then remade">maze</ascii-art>
-      </div>
-    </div>
-    <p class="caption">a maze carved by backtracking, then solved, then remade.</p>
-    <p class="prose">every maze is a worst-case algorithm with better framing — go somewhere, hit a
-       wall, back out, try again. it's how the vuln work goes, and how most of these writings started.</p>
-  </section>
+  </div>
 
   <!-- ── blog: faq dropdown ──────────────────────────────────────── -->
-  <section class="blog-sec" id="blog">
+  <div class="fig" id="blog" aria-label="the writings">
     <h2 class="sec">the writings</h2>
     <div class="faq" id="blog-faq">
       <p class="caption" style="padding: 10px 16px; margin: 0;">loading posts…</p>
     </div>
-    <p class="caption">things i wrote when i should've been sleeping — click a title to expand it.</p>
-  </section>
+  </div>
+  <div class="runes" role="separator" title="domain expansion — unlimited void." aria-label="gojo: domain expansion — unlimited void."><span aria-hidden="true">𒀍𒂈𒁖𒀆𒁄𒁱𒀹𒀫𒄝𒂍𒀆𒁱𒂭𒁄𒂈𒁱𒀹𒁖𒀹𒃸𒁱𒁔𒁄𒁖𒁄𒂾𒀫𒀍𒀹𒄁𒂈𒁄𒀍𒂍</span></div>
 
-  <!-- ── closing ──────────────────────────────────────────────────── -->
-  <section class="outro" id="outro">
-    <p class="prose">that's most of it. i update this page every now and then — so if something here
-       looks interesting, the fastest way to reach me is
-       <a href="https://x.com/berzelion">x</a>, or
-       <a href="https://cal.com/berzi">book a call</a> and we'll talk about anime, tech and coffee.</p>
-    <p class="links">[ <a href="mailto:dutta_ayush@srmap.edu.in">email</a> ]
-      [ <a href="https://codeforces.com">i do competetive programming for fun</a> ]
-      [ <a href="https://cal.com/berzi">book a call</a> ]</p>
-  </section>
-
-  <!-- ── footer ────────────────────────────────────────────────────── -->
-  <footer>
-    <h2 class="sec">status</h2>
-    <div class="status-line">
-      <span id="cf-dot" class="dot"></span>
-      <span id="cf-text">checking cloudflare…</span>
-      <span class="muted" id="cf-updated"></span>
-    </div>
-    <div class="big-ascii">
-      <ascii-art piece="uptime-bar" options='{"services":["site","cdn","dns"]}' label="60 day uptime for site, cdn and dns">uptime</ascii-art>
-    </div>
-    <p class="caption">status source: <a href="https://www.cloudflarestatus.com/">cloudflarestatus.com</a></p>
-
-    <h2 class="sec">here's a fucking lorenz attractor for no reason</h2>
-    <div class="big-ascii">
-      <ascii-art piece="lorenz" label="lorenz attractor trajectory">lorenz attractor</ascii-art>
-    </div>
-
+  <!-- ── say hello: terminal window form ──────────────────────────── -->
+  <div class="fig" id="hello" aria-label="say hello">
     <h2 class="sec">say hello</h2>
     <form id="hi" class="term-form" novalidate>
       <div class="ttitle"> say hello </div>
@@ -483,7 +504,34 @@
       </div>
       <div class="thint">tab next · enter send · esc clears</div>
     </form>
-    <p class="caption">you can reach me at <a href="mailto:dutta_ayush@srmap.edu.in">dutta_ayush@srmap.edu.in</a> or ping me on <a href="https://x.com/berzelion">x</a> / <a href="https://linkedin.com/in/ayushduttasrmap">linkedin</a>.</p>
+  </div>
+
+  <!-- ── closing note ──────────────────────────────────────────────── -->
+  <div class="note outro" id="outro">
+    <p class="prose">that's most of it. i update this page every now and then — so if something here
+       looks interesting, the fastest way to reach me is
+       <a href="https://x.com/berzelion">x</a>, or
+       <a href="https://cal.com/berzi">book a call</a> and we'll talk about anime, tech and coffee.</p>
+  </div>
+  <div class="runes" role="separator" title="the absolute strongest. the loneliness that follows." aria-label="gojo: the absolute strongest. the loneliness that follows."><span aria-hidden="true">𒂾𒁁𒀫𒀹𒀆𒀇𒂭𒂈𒁔𒃸𒂾𒀫𒀹𒂭𒂾𒂡𒂈𒁱𒀽𒀫𒂭𒂾𒂍𒀹𒂾𒁁𒀫𒀹𒁔𒂈𒁱𒀫𒁔𒁄𒁱𒀫𒂭𒂭𒀹𒂾𒁁𒀆𒂾𒀹𒀷𒂈𒁔𒁔𒂈𒄘𒂭𒂍</span></div>
+
+  <!-- ── footer ────────────────────────────────────────────────────── -->
+  <footer>
+    <h2 class="sec">status</h2>
+    <div class="status-line">
+      <span id="cf-dot" class="dot"></span>
+      <span id="cf-text">checking cloudflare…</span>
+      <span class="muted" id="cf-updated"></span>
+    </div>
+    <div class="big-ascii">
+      <ascii-art piece="uptime-bar" options='{"services":["site","cdn","dns"]}' label="60 day uptime for site, cdn and dns">uptime</ascii-art>
+    </div>
+
+    <p class="links foot-links">[ <a href="https://github.com/spirizeon">github</a> ]
+      [ <a href="https://x.com/berzelion">x</a> ]
+      [ <a href="https://blog.berzi.one">blog</a> ]
+      [ <a href="https://linkedin.com/in/ayushduttasrmap">linkedin</a> ]
+      [ <a href="#music">listen</a> ] [ <a href="#tools">tools</a> ]</p>
 
     <h2 class="sec">colophon</h2>
     <p class="credit">ascii art reverse engineered from <a href="https://ascii.rest">ascii.rest</a></p>
@@ -491,7 +539,7 @@
   </footer>
 </main>
 
-<!-- spotify iFrame API: lets the embed start playing on load (subject to browser autoplay policy) -->
+<!-- spotify iFrame API: playback only starts from the [ play ] button -->
 <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
 <script>
   (function () {
@@ -509,13 +557,10 @@
         embedCtrl = controller;
         if (!controller.addListener) return;
         controller.addListener("ready", function () {
-          var n = 0;
-          var attempt = function () {
-            if (playing) return;
-            try { controller.play(); } catch (err) {}
-            if (n++ < 5) setTimeout(attempt, 500);
-          };
-          attempt(); // autoplay best-effort (browsers may still gate it)
+          // never autoplay. spotify's pause() answers with a promise that rejects
+          // when no list has loaded yet, so swallow that rather than throw.
+          try { var held = controller.pause(); if (held && held.catch) held.catch(function () {}); }
+          catch (err) {}
         });
         controller.addListener("playback_update", function (e) {
           playing = !!(e && e.data && !e.data.isPaused);
@@ -526,7 +571,7 @@
             btn.textContent = playing ? "[ ▮ pause ]" : "[ ▶ play ]";
             btn.setAttribute("aria-pressed", String(playing));
           }
-          if (lbl) lbl.textContent = playing ? "go ahead, click play" : "";
+          if (lbl) lbl.textContent = playing ? "playing" : "read while playing";
         });
       });
     };
@@ -536,14 +581,7 @@
       catch (err) {}
     }
 
-    // any tap or key press is a user gesture — a blocked autoplay usually unlocks here
-    var unlock = function (e) {
-      if (e.target && e.target.closest && e.target.closest("#play")) return; // the button handles itself
-      if (!playing) try { embedCtrl && embedCtrl.play && embedCtrl.play(); } catch (err) {}
-    };
-    document.addEventListener("pointerdown", unlock);
-    document.addEventListener("keydown", unlock);
-
+    // playback starts only from the [ play ] button
     var playBtn = document.getElementById("play");
     if (playBtn) playBtn.addEventListener("click", togglePlay);
   })();
@@ -557,13 +595,29 @@
 const $ = (s, r = document) => r.querySelector(s);
 $("#year").textContent = new Date().getFullYear();
 
-/* the hero scene: images.jpg sampled into the scene ramp. it ships as a local piece
-   module and is handed to <ascii-art src> as a blob, so it mounts through the same
-   canvas + palette renderer the lantern lake used. */
+/* the loader's blur of quotes and the tab's marquee are the same list, so a line
+   that lands on the screen is the same one that lands in the tab bar. */
+const GOJO = [
+  "nah, i'd win.",
+  "throughout heaven and earth, i alone am the honored one.",
+  "because you're weak.",
+  "love is the most twisted curse of all.",
+  "you cryin'?",
+  "domain expansion — unlimited void.",
+  "my six eyes tell me you're geto, but my soul knows otherwise.",
+  "i'm going to raise strong jujutsu sorcerers.",
+  "the absolute strongest. the loneliness that follows.",
+  "alright — i get it now. this is hell.",
+];
+
+/* the hero scene: the gojo/sukuna spread, sampled into the scene ramp and baked
+   into the module below — one byte a cell, 4.8 KB of base64, no fetch at all.
+   it is handed to <ascii-art src> as a blob, so it mounts through the same
+   canvas + palette renderer the denji plate used. */
 (() => {
   const el = $("#poster-scene");
   if (!el) return;
-  const src = "// denji & power, sampled out of images.jpg into the scene ramp\nexport const meta = {\n  name: \"denji power\",\n  category: \"scenes\",\n  note: \"denji and power mid-swing, the chainsaw drawn across the blast\",\n  cols: 128,\n  rows: 38,\n  cell: 2,\n  fps: 1,\n  ground: \"#0d0705\",\n  palette: [\"#0d0705\",\"#1d0d0a\",\"#331410\",\"#4c1b12\",\"#682315\",\"#852e18\",\"#a13c1c\",\"#bb5221\",\"#d16a27\",\"#e48630\",\"#f2a53d\",\"#fcc74f\",\"#ffe38c\",\"#fff7d6\",\"#ffffff\"],\n};\nconst RAW = \"MjIyMjIzMzMzMzMzMzMzMzMzMzMyMzMzMzMyMjEzMzMzMzMzMzMzMzIzMjMyMjIxMTIyMzIzMzMyMzMzMzMyMzIzMzMyMzMzMzMzMzIyMjIyMzMzMzMzMzEyMTEwMjMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMjIyMjEyMTIKMjIzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMjMyMzIzMzMzMzMzMzMzMzMzMzMzMjEyMjIyMzMzMzMyMzIzMzMzMzMzMzMzMzMzMzMzMzIyMzMzMzMzMzIyMjExMDMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMjEyMjIyMjIKMTExMjIzMjMzMzMzMzMzMzMzMzMzMzMzMzMzMzMyMTIyMzIzMzMzMzMzMzMyMTEzMjIxMTExMTExMjAxMTMyMzMzMzMzMzMzMzMzMzMzMzMyMjIzMzMzMzMyMTEwMTEzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMjIxMjIyMjIKMjEyMTIyMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzIyMjMzMzMzMzMzMzMzMzIyMzIzMjIyMTAxMTIyMjIyMjMyMzMzMzMzMzMzMzMzMzMzMzIyMzMzMzMzMjExMTExMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMjIyMjIKMTExMTExMTIyMzIzMzMzMzMzMzMzMzMzMzMzMzMzMzMyMzIyMjMyMzMzMzMyMzMzMjMyMzIyMDExMjEyMTEwMjIyMjIyMzMzMzMzMzMzMzMzMzMyMTMzMzMzMjEwMTAxMTMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMjMzMzEyMjIKMTEyMTIxMjEyMjMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMyMjIyMjMzMzIyMjIyMjIyMjIxMjIyMjIyMjExMTIxMzMzMzMzMzMzMzMzMzMzMzMzMzIzMzMzMzExMTExMTIzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzIyMzIKMDEwMTEyMTIxMjEyMjMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMjIxMjEyMTIxMjEyMTIxMjIyMjMyMzIyMjIxMjExMDEyMzMzMzMzMzMzMzMzMzMzMzMxMzMzMzIwMTExMDIyMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMyMzIzMjIKMTExMTExMjEyMjIxMjIzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzIxMTExMTIxMjIyMjMzMzMzMzMzMzMzMjMyMjEyMjMzMzMzMzMzMzMzMzMzMzMyMzMzMzIxMTEwMTAyMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMyMjIKMDEwMTAxMTExMjEyMTExMjIzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzIyMTExMTAxMTMzMzMzMzMzMzMzMzMzMzIyMjMzMzIyMjMzMzIzMzMzMzMzMjIyMzMzMjEwMTExMDEwMTEyMjMzMzMzMzMzMzMzMzMzMzMzMjMzMjEyMTEKMTAxMTEwMTExMTIxMjEyMjIyMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzIxMjEyMTIxMjIyMjMzMzMzMzMzMzMzMzMzMzMzMzMzMzIzMzMyMzMzMzMyMjIzMzMyMjExMDEwMTAxMDEwMTEzMzMzMzMzMzMzMzMzMzMzMzMzMTIxMTEKMDEwMTAxMDEwMTEyMTIxMjIyMTIzMzMzMzMzMzMzMjMyMzIzMjMyMTAwMDEwMTAxMTExMTEyMjMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMjMyMzIzMjMzMzIyMDAxMjIxMDEwMDAxMDAwMTIzMzMzMzMzMzMzMzMzMzIyMzIxMTIKMTAxMDExMTExMTExMjEyMTIyMjIzMzMzMzMzMzMzMzIzMjIyMjEyMTEwMTAxMDEwMTExMTIyMjEyMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMTIxMTAyMzMzMjExMDEwMTAxMDExMjMzMzMzMzMzMzMzMjEzMzIxMjMKMTEwMTAxMDEwMTAxMTExMjEyMTIxMjIzMjIyMzIzMjIxMTExMTExMTAwMDEwMDAxMDExMTExMTIxMjIyMjIyMzMzMzMzMzMzMzMzMzMzMzMzMzMzMjIwMTAwMDEwMTExMDAwMTAwMDAwMDAwMDAxMzMzMzMyMzMyMDExMjEyMzMKMTEyMTEwMTExMDExMTExMTIxMjIyMjIxMTAxMTIyMzIyMTIxMTEyMTExMTAxMDExMTEyMTExMjIzMjIxMzIzMjIyMzMzMzMzMzMzMzMzMzMzMzMzMzAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMTMzMzMzMzMyMTEyMjMzMzMKMDEwMTExMTEwMTAxMDEwMTExMTIxMTAxMDAwMTExMTIyMjExMTExMTExMTEwMTExMTEwMDAxMDExMjIyMjIyMjEyMjMzMzIzMjMzMzMzMzMzMzMzMzMyMjExMDEwMTAxMDEwMTAwMDAwMDAwMDAwMjMzMzMzMzIyMTMzMzMzMjMKMTAxMDExMTExMTExMTExMTExMTExMDEwMTAxMDExMTEyMjIyMjExMTExMTExMTExMjExMDIxMTEyMjMyMzMzMjMzMzIyMjMyMzIzMjMzMzMzMzMzMzMzMzMzMzMzMzMyMzMzMzMxMTAxMDEwMTAxMjMzMzMzMjIxMjMzMzMzMzMKMDEwMTAxMDEwMTExMDEwMTAxMDAwMDAwMDAwMDAxMTEwMTEyMTIyMjExMDExMTEyMTIxMTEyMTIyMjIzMjMzMzMzMzMyMjIyMjIxMjIyMjMyMzIzMjMyMzIzMzMzMzMzMzIyMzIyMTEwMTAxMDExMzMzMjIxMjAxMDIxMjIyMTIKMTAxMDEwMTAxMDExMTExMTExMTAxMDExMTEyMTIxMjEyMTExMTEyMjIyMjExMTIyMjIyMTIyMzMzMzMzMzMzMzMzMzMzMzMzMzIzMzMyMjIyMTMyMzIzMjIyMzMzMzMyMjExMTExMTExMDEwMDAyMjIxMTIzMTExMjIzMjMyMzEKMDEwMTAxMDEwMTAxMDEwMTAwMDAwMTEyMTExMTExMTExMjExMTEwMTEyMTExMjIzMjIyMjIzMzMzMzIzMzMzMzIzMzMzMzMzMzMzMzMzMjMyMjIyMjMyMjEyMjIyMzIyMTEwMTAxMDExMTAxMTEwMDAxMDEwMTExMjMzMzMzMjIKMTAxMDExMTAxMTEwMTExMTExMTEyMTExMTExMTExMTExMTExMjExMTExMTEyMTIyMjIzMjMzMzMzMzMzMzIzMzMzMzMzMzMyMzMzMzMzMzMzMzMyMzIzMjIyMzIzMjIyMjExMDEwMTAxMTExMTIyMDExMTEyMDEwMTExMTExMTEKMDEwMTAxMDEwMTAxMDExMjEyMjIwMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMzIzMzMzMzMzMzMzMzMzMjMyMzIzMjMzMzIzMjMyMzIzMjMzMzExMTIyMTExMTExMTExMTExMTAxMTMxMTAxMTMyMjEyMTIyMjIyMjMKMTAxMDEwMTAxMDExMTAxMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTIxMTEyMTMyMjIzMzMzMzMzMzMzMzMzMjMzMzMzMzMzMzMzMzMzMzIzMjMxMTAwMDEwMDAxMDEwMTAwMDIzMzIyMTIyMzMzMzMzMzMzMzMzMzMKMTExMTAxMDEwMTAxMDEwMjExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMjIzMjMyMzIzMzMzMzMzMzMzMzMzMzMzMzMzMzMyMzMzMjMyMjExMDEwMDAwMDAxMzMzMjIyMzMzMzMzMzMzMzMzMzIzMzMKMjIyMTIxMTAxMDEwMTAxMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTIxMTEyMTExMjEyMjIyMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMyMjIyMjIyMjIzMjIxMjIzMjIxMjMzMzMzMzMzMzMzMzMzMzMzMzMKMTExMjEyMTEwMTAxMDExMTExMTEwMTExMDExMTAxMTEwMTExMDExMTAxMTExMTExMTExMTExMTExMTExMTExMTExMTMyMzIzMjIyMzMzMzMyMzMzMjIyMjEyMTIxMTExMjMzMzMzMzMyMjExMTMzMzIzMjMyMzIzMjMzMzMzMzMKMjEyMTIxMjEyMTExMTAxMTExMTExMTExMTExMTExMTExMTExMTExMTExMTEyMTIxMTExMTExMTExMTExMTEyMTExMjEyMjMyMzIzMjMzMzMzMzMyMjIyMjIxMjEyMTMzMzMzMzMyMjIzMzMzMzMzMzMyMzIzMjMyMzIzMzMyMzIKMTIxMTExMTExMjExMTEwMTExMTExMTExMTExMTExMDExMTAxMTEwMTAxMDExMTExMTExMTExMTExMTExMTExMTExMTExMTEyMjMyMzMzMzMzMzIzMjIyMjEyMTExMjIzMzMzMzIyMjMyMjIzMjMyMzMzMzMzMzIzMjMyMjIzMjMKMTExMTIxMjEyMTExMjExMTIxMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTEyMjMzMzMzMzMzMzIyMjIyMjIzMzMzMzMzMTExMjIzMzMyMzIzMjMyMzMzMzMzMzMzMzMyMjIKMDAwMTAxMDEwMTAxMTEwMTExMTEwMTExMDExMTAxMDEwMTEyMTExMTExMTIxMjExMTExMTExMDEwMTExMDExMTAxMTExMTExMTExMTAxMTMyMzIzMjMzMzIzMzMzMzMzMjMxMTEyMjMzMzMzMjIyMzIyMjIyMjIzMjMyMzIzMjMKMTAxMDAwMTAxMDEyMzMzMTExMTExMTExMTExMTExMTExMTExMjEyMTIxMjEyMTIyMjExMTExMTExMTExMTExMTExMTExMTIxMjEyMjIxMjEyMjMzMzMzMzMzMzMzMzMyMjIzMzMzMzMzMzMyMzIzMjIyMjIyMTIxMjIyMjIyMzMKMjMyMjIyMTExMjIzMzMxMTExMDExMTAxMDEwMTAxMDEwMTAxMTExMTExMTExMTExMTIxMTExMTExMTExMDExMTExMDExMTAxMTExMTEyMTIxMjIzMzMzMzMzMjIxMjEyMjMzMzMzMzMyMzIyMjIyMjEyMTIyMjEyMTIxMjEyMTIKMjIzMzMzMzIzMjIxMzIxMTExMjExMTExMTExMTExMTExMTExMTExMTExMTExMTIxMjEyMjIxMTEyMTExMTExMTExMTExMTExMTExMTExMjEyMzMzMzMzMjMyMzIxMTIyMzMzMzMzMzMzMzMyMjIyMjIyMjIyMjIyMjIyMTIxMjEKMTEwMTExMTIwMTAxMTEwMTAxMTEwMTAxMDEwMTAxMTEwMTAxMDEwMTAxMDEwMTExMTExMTExMTExMTExMTEwMTAxMDEwMTExMTExMTAxMTIxMTEyMTIzMzIyMjIyMzMzMzMzMzMzMzMzMzMyMTIxMjEyMTIxMTExMTExMTAxMTEKMjIxMDEwMTExMTExMTExMTEwMTExMTExMTExMTEwMTExMTExMTExMTExMTExMTExMTEyMTExMjEyMTIxMTEyMTExMTExMTExMTEyMTExMTExMDExMjEzMzMyMzIzMjMzMzMzMzMzMzMzMjMyMjIyMTIxMjExMTExMTExMTExMTEKMDEwMTAxMDExMTExMDEwMTExMDEwMTAxMTEwMTAxMDEwMTAxMDEwMTExMTExMTExMTExMTExMTIxMTExMTExMTEyMTExMTAxMTExMTExMDEwMTAwMDExMjIzMjIxMjEyMjIyMjIyMTIxMjEyMTIxMTExMTExMTExMTExMTExMDEKMTExMTExMTAxMTExMTExMTIxMTExMTEwMTAxMDExMTExMTExMTExMDExMTAxMTExMTExMTIxMjEyMTExMjEyMTIxMTAxMDEwMTAxMDEwMDAxMDAwMTAwMDExMzMyMTExMjEyMTIxMjEyMjIxMjExMTExMTExMTExMTExMTExMTEKMDEwMTAxMDEwMTExMDEwMTAwMDEwMDAxMDEwMTAwMDEwMTAxMDEwMTAxMDEwMTAxMDExMTExMTExMTExMTExMTExMDEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDIyMjExMDEwMTAxMDEwMTExMTExMTAxMTEwMTExMDExMTExMTEKMTAxMTExMTExMTExMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTExMTEwMTExMDExMTAxMTExMTExMTExMTEyMTExMTAxMDEwMTAxMDAwMTAwMDEwMDAxMDAwMTAyMjMxMTAwMDAwMTAxMDEwMTExMTExMTExMTIxMTEyMTExMTEKADc2Njc5OTlhYWFhYWFhYWFhYmJiY2NkZGNjOTc1YmNjY2NjY2RkY2NjZGNkY2E3MzM3YWJjY2NiYmFiYmJiYWFhYWFhYmJiYmNkZGRjODlhYWJhYWFhYTk3NzQyMjVhYWFhYWFhYWJiYTk5OTk5OWFiY2JiYmJiYTg3Nzc3NjY2CjU2Nzc3ODlhYWFhYWFhYWFhYWJiY2NjY2NjY2I5OGFhYmJiY2NjY2NjY2RjYWNkYzk1NTY2OGJjY2NhYWFhYmFhYWFhYWJiY2NjY2RkY2E4NjlhYWFhYWE4NzUyMjI4YWFhYWFhYWFhYWFhYWE5YWJiYmJiY2JiYjk2ODg3Nzc3CjM0NTY2Nzg5YWFhYWFhYWJiYmJiYmJiYmNjY2RkOTM1OWJkZGNjY2NjYmNhNjQ2Yjk1NDQ0MjM0NzczNDU4YWFhYWFhYWFiYmNjY2NkY2NiODc5YWFhYWFhNzQzMjIzYWFhYWFhYWFhYmFhYWFhYWJiYmJiYmJiYmE5Nzg4Nzc3CjM0NDQ0Njc3ODlhYWJiYmJiYmJiYmJiY2NkZGRkZGI4Nzc5Y2RkY2NjY2NjZGM4Nzg5YWE2NzMwMTM0NTY2Njg5OWFhYWFhYmJjY2NjY2NiYjk4OWFhYWFhOTQyMjIyNGFhYWFhYWFhYmFhYWFhYWFhYWFiYmJiYmJjYTg4ODc4CjM0NDQzNDU2Nzc5YWJiYmJiYmJiYmJiYmNjZGRkZGRkY2JhN2FiY2RkZGRkZGRkZGRjY2NiOTEyNDU1NTY0MjQ2Njg4OTk5YWJiYmJiYmJiYWJhOTZhYmFhYjgyMjIyMTNhYWFhYWFhYWJhYWFhYWFhYWJiYmJiY2NjY2E4OTk4CjIyMzQ0NDU1Njc3OWFiYmJiYmJiYmJiYmNjY2NjY2NkZGRkNjRhOTlkY2E5Nzc3Nzc2NjY1NDQ1NTU2NjUyMTQ0NTliYmJiYmJiYmJiYmJiYmFiYjk4YWJhYjgzNDMyMjI5YmFhYWFhYWFhYWFhYWFhYWFiYWJhY2NjY2I5ODk5CjEyMjIzNDU1NTY2Nzg5YmNiYmJiYmJiYmJjY2NjY2NjY2RkZGM5NzU3NDU0NDU1NTU1NDQ1NzhhYmNhNzY1NDY0MTAzOWNiYmJiYmJiYmJiYmJiYmI5N2FiYmI2MjMzMTE2YWJhYWFhYWFhYmFhYWFhYmFiYmJiYmJiYmNiYThhCjEyMjEyMzQ0NTY2NjY3OWFiYmJiYmJiY2JjY2NjY2NjY2NjY2RkZGM1MzM0MzM0NTU0NjhiY2NkY2RkY2NiOTc5OTc0NTdhYWJiYmJiYmJiYmJiYmJhN2FiYmI3MjMyMTEwNGJiYmJiYmJiYmJiYmJiYmJiYmJiYmJjY2JiYTk3CjExMTExMTI0NDU2NTU0NTc4YWFhYmJiYmJiYmJiY2NjY2NjY2RkZGRhNTQzMzIyNDY5Y2RkY2NjZGRkZGRkZGM4OGJiYWE4NzlhYWJiYmJiYmJiYmI5N2FiYjgxMTUzMTExMTM1OGFiYmJiYmJiYmJiYmJiYmJiYmNkYzk0ODU0CjExMTIyMTEyNDQ1NTU0NTY2OGFhYWJiYmJiYmFiY2NjY2NjY2RjY2M4NTQ1NDM0NDU4NDdhZGRkY2RkZGRkZGRkY2NjYmJiYmFhOTk5YTlhYWFhYTg4YWJiOTUxMDIyMDExMTAwMDE0OWJiYmJiYmJiYmJiYmJiY2NjYTQ0MzIzCjAxMTIyMTExMjM0NTU2NTY3Nzc3YWFhYmFhYWFhYWFhYmJiYTk5ODMwMDEyMjIxMjIyMzQ0NjhjZGRkZGRkY2RjY2NjYmJiYmJiYmJiYjk5OTlhOWFiYmE3NjMwMjlhNDEwMDExMTAwMDQ5YmJiYmJiYmJiYmJjY2I5N2E4MzI1CjExMDExMTExMjEyNDU1NTU3NjY3OTlhYWFhYTk5YTk4ODU1NDQ0MzEwMDAwMDAwMDE0MzQ1ODgzN2RkZGNjYmJjY2JiYmJiYmJiYmJiYmJiYmJiYmNjOTY0NDEwN2JiYjcyMTEwMDAwMDAwMzdiY2JiYmJiYmJjYjg1YWI3MzdjCjMyMTExMTEyMjExMjM0NTU2NjY2Njc4OTk4NzY2NjY1NDMzMzMzMjMyMDAwMDAxMTIyMjM0MzU3Nzc5Nzk5YWJiY2JiYmJiYmJiYmJiYmJiYmJiYmI2MjEwMTExMTI0MzExMTExMDAwMDAwMDAxNmJiYmJiYmJiNzIzMzU0OWRkCjEyMzMxMTExMTEyMjIyMzQ1NTU2Nzc1NTMyMTM1NjY2NDMzMzMzMzIyMjExMTExMTEyMzMyMjU5YjkzNGFhYTk4OGFiYmJiYmJiYmJiYmJiYmJiYmExMDAwMDAwMDAwMDAwMDAwMTExMTAwMDAwMDRiYmJiYmJiYTQ0NDZiZGRjCjAwMTIyMzIyMTExMTIyMjMzMzQ1NDExMTAwMTEyMzQ1NTQ0MzIyMjIzMjIzMTEyMzIxMDAwMTIzMzhhYTg3ODg0NDdiY2JhYmJjY2NjYmJiYmJjYmJhODc1MzEyMjExMDAwMTEwMDAwMDAwMDAwMDViYmJiYmJiODVhYmNkY2NkCjEwMDExMjIyMjIyMTEyMjIyMjIyMDAwMDAwMTAxMjEyMzQ0NTQzMjIyMjIxMTIyNDQyMDA0MjI1NTY5Y2NiYmE4YWE3NjY3ODg4ODljY2NjY2NjYmJiYmJiYmJiYmJhYWFiYmJiNDEwMDAwMDAwMDhiYmJiYTg3MjdjY2RkZGRkCjExMTExMTExMjIyMjIyMjIyMjIwMDAwMDAwMDAwMjIxMTIyMzQ0NDQzMjEyMjEzNTU1MzE1NTM2ODhiZGRkZGNjY2NiOTg4ODg3NDU3OGFiZGRiYmJiYmJiYmJiYmJiYmJhOWJiODMzMjIxMjIyNmNjYjk2NzcyMTI1NzljODc2CjExMTExMTExMTEyMjIyMjIyMjEwMDAwMjIzNDQ0NDU1NDQzMjI0NDU1NDMxMTU1NDQ1NTQ2N2FjY2RkZGRkZGRjY2NkY2FiYTk5YWJhOTY1ODVhYTk5ODY1OGJiYmJiYjkzMTIzMzIyMTAxMDAwNDc1MzE2OTQxMjY4OWFjYzk1CjAxMTEyMjExMTExMTIyMjIxMDAwMTM1NTQ0MzMzMjMzNDQ0MzMyMTIzMzMzMzhhYTg3NjY3YWRkZGQ5OGRkZGNjZGNjOWJjY2JjYmFiY2FhODY4OWFhNzQzNDg5YWFhNzQzMjIxMTExMzMyMjIwMDAwMDIzMjEzNGFjZGRkZGM1CjEwMTExMTExMTExMTExMTIyMjM2NzUzMjIyMjIzMjIyMjIzMzMzMjIyMjMzMzM2Nzc3OTliY2JjY2RkY2RhZGRjY2JiYmJjYTlhYmJiYmJiYmE5YTlhOTk2OGFhOTk2NjUzMTAwMDAwMjMyMjE3NTExMjEyMzAxMTIyMjIyMTIyCjExMTExMTExMTExMTExNDY3ODc0MjIyMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzNmJhYmJjY2NkZGRjZGRkZGJhOWFiYjk4Y2NhYWFhOTg4ODdhYmE0MzVhYTUzMzMzMzMzMzMzMzIxMTVjNjExMTVhYTg3Nzc4ODk5YWFiCjExMTExMTExMTExMTExMzUyMjIyMjIyMjIyMzMyMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzQ5OTc3OWFhYWJjZGNjZGRkY2NkZGJjZGNjY2JiYmI5ODg4NzY2NDEwMDAwMDAwMDAwMDAwMDA1YmNhNTU3OGJjY2NjZGRkZWRkZGRkCjQzMjIxMTExMTExMTExMTczMzMyMjIyMjIyMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzNDY4OWFhYmFhY2RkZGRkYTlhZGRkY2NjYWFiYmJiYmFhODc3NjU0MzEwMDAwMDAwM2JjYzk2OGNjYmJjY2RjY2NjY2JhY2NjCjU1NDMzMjExMTExMTEwMzUyMzMyMjMzMzMzMzMzMjIyMjIyMjIyMjIyMzMyMzMzMzMzMzMzMzMzMzMzNDQ1NTU2OGJjY2RkY2RkZGNjZGRkZGJiY2NjY2NiNzU2NjY1NDU2NjU0NTg5YmE1NTZiZGRjY2NjZGRjY2NjY2NjY2NjCjMzNDQ0NDMyMjExMTEwMzQzMzMyMjMzMzMyMjIyMjIyMjIyMjIyMjIyMjMzMzMyMjMzMzMyMzMzMzMzMzMzMzQ0NDU5YmJiYmFhYmNjZGRkY2RjY2NhYTc1NjQ0NDQ3NDliYmNiY2NiODY0MjdkZGRjY2JiYmJiYWFjY2NjY2NiCjMzMzMzNDU0MzMyMjExMjMzMzMzMjIzMzIyMjIyMjIyMjIyMjIyMjIyMjIzNDQzMzIyMjIyMjMzMzMzMzMzMzMzMzM1OTlhYTk4NzhiY2NhOWRkYjg3NzY1NDQ0NDRiY2NjYmJjYjk3OWI4OWRjY2JiYWFhOTk5OThhYmJiYmFhCjMzMzMzMjIzNDQ0MzMyMTEzMzMzMzMzMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIzMjIyMzIyMjIyMjIyMjIyMjIzMzMzMzMzNThhY2NjY2JiY2RkYzg2OWE2NTQ0NDViY2NjY2I5NzliOTdhY2JhYWFhOTk5OTk5OWFhYWE5OTlhCjEyMjIyMjMzMzIzMzM1MzQ2MjIyMjIyMjIyMjIyMjIxMjIyMjIyMzMyMzIzMzIyMjIyMzMzMjIyMjIyMjIyMjIzMzMzMzMzMjIyMzdhY2NjYmNjY2E5NzY0NTU3OWNjY2NjYjUyMjQ3YWNjYjk5OTk5OTlhYWFhYWFhOTk4ODc4CjAwMDExMTIyMjIyMTIyMTQzMjIyMjIyMjIyMjIyMjIyMjIzNDQ0NDQ0NDQ0Njg0MzMzMzMzMjIyMjIyMjIyMjIyMjMzMzMzMzMzMzIyMzdhY2JiY2NjY2NiYmNjY2NjY2NhNjQ3NjhjY2NjYjk5OWFhYWE5OTg4ODg4ODg4ODc3CjEwMDAwMDAwMDAyOWNiODIzMjIyMjIyMjIyMzIyMjIxMTIyMzQ1NDQ0NDQzMzQ2NjQzMzMzMzIyMjIzMjIyMjIyMzMzMzM0NDU1NjU1NTQ0Njk5YmNjY2NjY2NjY2NiYTY2OGJjZGRkZGNiYWFhOTk4ODc3NjY1NTU2NjU2Nzg4CmJiYjk4NzUzMjdjY2NjNjEzMzIyMjIyMjIyMjIxMjIxMjIyMjIyMjIzNDMzNDMzNDU2NTQzMzMzMzMzMjIyMjIyMjIyMjIyMjIzMzQ1NTY2NTVhYmJjY2NjY2E2Nzg2NjliY2NjY2NjYmE5ODg4Nzc2NTU1NjU1NTU2Nzc3NzY2CjM3YmNjY2E5YTk2NGE2MTIyMzMyMjIyMjIyMjIyMjIxMTExMjIyMjEyMjIyMzM0NDM0Njc1NDMzMzMzMjIzMjIyMjIyMjIyMjIyMjIzMzQ1N2FiYmJiYTlhOTk2MTI0YWNjY2NjY2NiYmNhNzc2NTY1NTY2Nzc2NjY2NTQ0NDQ0CjMxMTQ3MzM1MjExMjMxMjIyMjMzMjIyMjIyMTIyMjMzMzIyMjIxMTIyMjIyMjIyMzMzMzQzNDU0MzQzMzQzMjIyMTIzMjIyMjM0MzIyMzQ1NTQ2ODc2NjhhOTk5OWJiY2NjY2JjY2RjYmNjNzY2Njc3NzY2NTU0NDQ0MzMyMjMzCjg3MzEwMTIyMjIyMjEyMjExMTIyMjIyMjIyMjIxMTExMTIyMjIzMjIyMjIyMTIyMTI0MzMzMzQ1NDQ0MzM0NDQzMzMzMjIyMjMzNDMyMjMzMjEzMzQ1Njg4Nzg5YWFiYmNjY2NjY2NjYmJhNzY2NjU1NDQzMzMzMzMzMzMzMzMzCjAxMjIyMjIyMjMyMjIxMTIyMjIxMjIyMjIyMTExMTExMTExMTEyMjIzMzQyMjMzMzMzMzMzMzM0NDMzNDMzMzM0NDQyMjIyMjIyMjMyMjExMTEwMDExMzU2Nzc2NTY2Njc3ODk4Nzc3NjY1NTU0MzMzMzMzMzMzMzMzMjMyMjEyCjExMTExMTExMTExMjIyMzMzMzMyMjIxMTEwMTExMTExMTExMTExMTExMTExMTExMjIzMzMzMzMyNDQzMzMzMzMzMzIxMDAwMDAwMDAwMDAwMDAwMDAwMDAwNDY3NTIyMzQ1NTQ0NDU0NTU1NDQ0MzMzMzMzMzMyMzIyMjIyMTEyCjExMTExMTIyMjIyMjIyMjExMDAxMDAxMTExMTExMTExMTExMTExMTIyMTExMTExMTEzMzIzMzMyMzQzMzMzMzMzMzEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDE1NjUyMTIyMjIyMTExMjIyMzMzMzIyMjIyMjMyMzMzMzMzNDQ0CjExMTIyMjIyMjIyMjEwMDAwMDAwMDExMTExMDExMTExMDExMTIyMjExMTExMTExMTExMTEyMjIyMzMyMzMzMzMzMjExMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMzY2MzAwMDAwMDAwMDAwMDIzMjIyMzMzMzQ0NDQ0NDQ0MzMz\";\nconst DOTS = [\" \", \"\\u00b7\", \"\\u2022\", \"\\u25cf\"];\nlet ART = \"\", IDX = \"\";\ntry {\n  const bin = atob(RAW);\n  const cut = bin.indexOf(\"\\u0000\");\n  ART = bin.slice(0, cut).split(\"\\n\").map((r) => [...r].map((c) => DOTS[+c] || \" \").join(\"\")).join(\"\\n\");\n  IDX = bin.slice(cut + 1).replace(/\\n/g, \"\");\n} catch (e) { ART = \"denji and power\"; }\nexport default function denjiPower() {\n  const color = new Uint8Array(128 * 38);\n  for (let i = 0, k = 0; i < IDX.length && k < color.length; i++) color[k++] = parseInt(IDX[i], 36);\n  return (t, env = {}) => {\n    if (env.color) env.color.set(color);\n    return ART;\n  };\n}";
+  const src = "// gojo and sukuna, sampled out of the panel into the scene ramp: one byte a\n// cell, 0 for paper and 1..7 for ink by weight.\nexport const meta = {\n  name: \"gojo and sukuna\",\n  category: \"scenes\",\n  note: \"gojo and sukuna side by side, sampled out of the panel\",\n  cols: 140,\n  rows: 40,\n  cell: 2,\n  fps: 1,\n  ground: \"#0a0a0a\", // the page's own ink\n  // the page's own ground, its greys tinted as they climb into its accent\n  // green, then out to white. no stop sits on the ground, so faint ink still\n  // reads as ink rather than as a hole in the panel\n  palette: [\"#0a0a0a\",\"#1e2a20\",\"#33463a\",\"#4a6b52\",\"#6f9c6f\",\"#7ee787\",\"#b9f5c4\",\"#ffffff\"],\n};\n\nconst DATA = \"BwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwAAAAAAAAAAAAAAAAAAAAUFBQcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcEBAAAAAAAAAAHAAAAAAAAAAAAAAAAAgMDAgMDAwMHBwQDAwQEBAYFAwIAAAQGAAAAAAMGBAQDAwMGBAUEBAQAAAAAAAAABQUAAAAAAAAHAAAAAAAAAAAAAAAAAAAAAwYFBAYGBAMAAAIAAAAAAgIABAMAAAAAAAAAAAAABAADAAQDAwMCAgIDBQQEBgYGAAAAAAAAAAcAAAAAAAAAAAAAAAAEAwUCAAAAAAAEBAMDAwMCAgMDAgADAwMAAAAAAwQFBwYEAwUFAAAAAAAAAAAAAAAAAAYFAAAAAAcAAAAAAAAAAAAAAAAAAAQFBQUGBAYEBAQAAwIDAAACAwAABAAAAgMAAgACAwICAgACAgIDAgICBAMHBQYFBgYFBgUAAAAABwAAAAAAAAADAAMFBgMEBAUEBQIDAwIAAwMDAwIDAgAEAwADAAAAAAADAAAABAQAAgAAAAAGBAQHBwcABwAAAAAGBgAABwAAAAAAAAAAAAAAAAUGBgUHBQUEBAIAAAYCAwQDAwMDAwADAgACAAAAAAMAAgQAAwIAAgIDBAQEAwAEBQYFBQUFBAMAAAAHAAAAAAICAwIDAgMDBAQFBQYEAwIABAQDAAQDAAACAwAAAwMDAgAAAAMCAAADAAUCAAAABwcHBwcHBwcHBQAAAAAHAAAHAAAAAAAAAAAAAAAABQYHBgcGBQMCAwQEAgAAAAICBAIDAwQCAgMCAgACAgAEAAAEAgMDAwMDAgIAAgICAwcHBQcGBgIAAAcAAAAAAAAAAgMDBAQFAwMDAwMAAgICAwQAAAACAAAABAMAAAIDAgAAAgMAAAQAAwIAAAAHBwcFBgcDBwYFAAAAAAYAAAcAAAAAAAAAAAAAAAAAAAUGBgUCBAMCAgACAwMAAAAAAgMABAUCAwMCAwAAAAIDBAMFBAMDAgADAwMCAgIDBgUHBQUFBAAABwAAAAAAAAACAgMFBgQEAwICAwMCAAACBAQAAAICAAAAAwMAAwMCAAADBAADAwMDAgAAAAAABwcHBwcHBwAAAAAABQAABwAAAAAAAAAAAAAAAAAFBgUGBwMCAgICAgMEAgACAAAAAwQCAgICAAADAwMEAwMEBAMAAAIDAwAEAwIABAMAAAMGBwYGAAAHAAAAAAAAAAADAwMFBAQDBAQAAAMDAAMAAwIAAAIAAAAAAwMABAMAAAUCBAQEBQMCAAAAAAYHBgAHBwAAAAAAAAADAAAHAAAAAAAAAAAAAAAAAwYGBQYEBwMDAwAEAAIDAwMDAgAAAAAAAwMGAAAEAwMFBQAAAwIDAwMAAwQDAwQCBgQHBwUFBQAAAAcAAAAAAAAFBAICAgIDAAADBAMDAAIFAwICAgAAAAIAAAAAAwQAAAAABAAEBgQCAgMAAAAEBwcEBwcHBgcAAAAAAgUAAAcAAAAAAAAAAAAAAAAGBgcGBwUDAwQDBAQDBAMCAAAAAAAAAAAAAAAAAAAAAAAAAAMCAAAEBAUEBAMAAAADBQQCBgcFAAAABwMEAwAFBQUDAwMDBAICAwAAAAMCAgMDAwACAwIAAgIAAAAAAgMAAAIABAACBAMDBgAAAAYHBwcHBwcHBwQAAAAEBQAABwAAAAAAAAAAAAAAAAUGBgYGBQMDAwQEAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAMDAwQFBgQEBwYGAAAHAAMFBAQEAwQEBAUCAgMDAwIAAgMDAwMEAAACAwMDAAAAAAAAAAIDAAAAAAAAAwMGAAAAAAAAAAAAAAAAAAAAAwQAAAAHAAAAAAAAAAAAAAAAAAQFBgUFBgACBAMEAwAAAAAAAAAAAAACBAAAAAAAAAAFAgAAAAAAAAAAAAAEBQYEAwIGBAQHBQAAAAcAAAAFBAQDAwQDAwICAAACAgICBAAAAAACAwIAAgIAAAAAAAACAgMCAAAAAAADAwAEBQUCAAAAAAAAAAAAAAUEAAAAAAcAAAAAAAAAAAAAAAAABgcEBgcDAAMFBQMAAAAAAAAAAAAAAAAHAwACBwAAAwcAAAAAAAAAAAAAAAAEBAUDAAUHBQMAAAAABwAAAAAABAQCAgMCAwICAgACBAAAAAADAwMCAAQAAAAAAgMCAwMCAAAAAAAAAAMDAwMFAwUGBgcGBQQFBQYFBQYDBAUABwAAAAAAAAAAAAAAAAAFBQYHBgMCBgcDAAAAAAAAAAAAAAAAAAUHAgAHAAQHAgAAAAAAAAAAAAAAAAAGBgUEBAcFAAAAAAAHAAAAAgMDAwQDAwADAwMCAwQAAAQEBAIAAAAAAAAEAAMAAAADAgIAAwMDAgAABAMAAwMDAwAGBQQDAgMDAwUGAAAAAAAHAAAAAAAAAAAAAAAAAAAABwQGBgcHAgAAAwMDAwAAAAAAAAAAAAcHAwAGBwcAAAAAAAAAAAMEBQQAAAUHBwcHBAcFAAAAAAcAAAIEAwYDAwMEAwMCAgMDAAQCAwAAAwICAgIDAwQAAAMDAwIAAAACAgQDAgACAAAEAwMABQIDBAMEAwQDAwUFAAAAAAcAAAAAAAAAAAAAAAAAAgAFAgIHBwcAAAAAAAAABAQEBQMEBQAAAAMEAAQAAAAAAwQEBAQFBAAAAAAAAAcHBwUHBgAAAAAABwADBAADBAMFBgUFBAIDAgAEAwIDAwMAAwIAAAUEAgMFBAQDAwQFBQQEBAQEBwIDAgUAAAACAwIFAwMDAwQFAwUDAAAABwAAAAADAwQAAAIAAAAAAAMHBQAHBwAAAAIAAAAAAAAABAYGBgQAAAAAAAAFBwYEBQAAAAAAAAAAAAAAAAcFBgcFAAIDAwAHAAIAAwQEBgQEBAQEAwUEBQMCAgMFBAYCAAIEAwMEBAIDBAMEBAMFAwIDBAUEAwQFBQQDAwMFBAYEAwUDAgQEBQYAAAAHAAAAAAAAAAAAAAAAAAAAAAUDBwQHAAAAAwYHBwcHBwcHBwQEBwQAAAAAAAYFAAcHBwcHBwcHBwUAAAAABwQGBwQAAAAAAAcAAAAABgQEBAQFBgUFAAYEBQQDBQADBQADAwADBQQEBgUDAwIEBAMDAwUFAwUEAwUEBAMABAMEAwUFAwQEBAADBAAAAAcAAAAAAAMDBAUFBgUFBAQEBAYHBgMAAwYAAAIAAAMFBgYHBwAABAMAAAAGAwAHBwcDBwYEAAIHAAUHAAADBgUHBQAAAgMCBwAAAAICBQQDBAQDBQUEBQQEAwMDBAQGAwUEAwUEBAMCAgMDBAICAwMFBAMEBAMCBAQEAwMDBAQGBAQGAwUFAAAAAAAABwAAAAMDBAQDAwMDAgIDAwMEBQUFAwUDBAUFAgUEAAAAAAAGBAAAAAAAAAQAAAYEAAAAAAAEBAQFBQUEBAMGBAUAAgMDAwIHAAAAAAAEAwQFBAUEBgMHBAMEAwMDBAUEBAQAAAAAAAIDAwQAAgMDAwMABAQFBAMEBQQDBAMEBgMFBQQDBQUAAAAAAAAHAAMCAAIDAwMDBAQEBAMCAAAABQcGBwcHBgYFBQMEBAQDAwAAAAAAAAAAAAAAAgMDAgQEBAMGBgUHBwcFAAUFAgMDBAQEBAcAAAAABAQEBQUEBAMEBQYFAwUEBwUDAwUEBAQEAwAAAwMDAAMAAwQEAwQGBAQEAwIDAwMDAgYABAQEBgUGAAAAAAAAAAcAAAAAAgQEBAQEBAQDBAQEAwQEBQcFBwcGBgQHBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBwcHBwcHBQADBAQEBAMABwAAAAAABQUFBAMEBQUFBQYEAwMEBgYFBAQFBQQDBAQDAwAAAgQABQMAAwUFBQQEBQQEAwMFBQAFBAcFBAQAAAAAAAAABwMEBAMDAwIDBAUFBQYFBQQEAwQFBgcGBgAHAwAAAAADBAQHBwcHBwcHBwcHBwYEBAUGBgAAAAQAAAcFBAUDAgMDBAMDAgIHAAAAAAAAAAACBQQEAAYEBgUDAgADAgAFBQQFBgYAAgQAAAAAAgMAAAMGBgUEAgUAAwQEBQYABAUEBwMEAwUAAAAAAAAHAAMDBAQEBAUFBAQEBAQDBAUFBQUFBgQHAAAAAAAAAAAAAAAAAAIFBwcHBQIAAAAAAAAAAAAAAAAABQUFBAUFBAQDAgICAgcAAAAAAAAAAAQAAAUCBAUEBQADAAACAgAEAwQFBgMDAgAAAAACAAADBQYEAAIAAAMABAQDBQUEBAYABAQAAAAAAAAAAAcAAwMDBAQEBQQEBQUFBQUFBQMAAAAAAAQAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAABQUGBAQEBAMDBwAAAAAAAAAAAAAABQQFBQcFAAAAAAAAAAACAAACAAAAAAAAAAAAAAMCAAAAAAAAAAQGBAAABgUHBAAABQAAAAAAAAAABwMDAwMDAwMDBgQEAgMDAwAAAAAAAAAAAAcAAAAAAAAAAAAAAAAAAwQABAQEAAAAAAAAAAAAAAACBQAAAAAAAAAFBgYFBAMHAAAAAAAAAAAAAAAABQMDBwcHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAEAAQHBwUDAAAAAAAAAAAAAAAHAwMDAwMDBAUGAAMEAwAAAAAAAAAAAAAAAwcDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUFAAAABwIAAAAAAAAAAAAAAAAGBAcAAAAAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgMEAwUAAAAAAAAAAAAAAAcDAgMDAwQFBQYCAAQDBQMAAAAAAAAAAAACBwcHAAAAAAUFBQYAAgUHBwYHBwcHBgYHAAAAAAcHBQAAAAAAAAAAAAAAAAAABwAAAAAAAAQAAAAAAAAAAAAABwQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcEBgQAAAAAAAAAAAAAAAAABwIEBAUFBQUEBgIAAAAAAAICAAAAAAAAAAAHBwcHBQAAAAAABAQEAwMEBQYFBQcDAAAAAwcHBQYGAAAAAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHBwAFAAAAAAAAAAAAAAAAAAAHAwQEBAQDBgUGAAAAAAAAAAAAAAIAAAAAAAcHBgYGBgcHBQQAAAAAAAAAAAACAwYHBwcFBgUGBwAAAAAAAAAAAgQDAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAHBwAAAAAAAAAAAAAAAAMDAAMCAAAAAAAAAAAAAAAABgcAAAAAAAAAAAAAAAAAAAAAAAcHAwMEBQUFBQUGBgAAAAAAAAAAAAAAAAAAAAAAAAADAAYHBwcHAgcEAAcGBQcHBwcHBQUEAAAAAAAAAAMAAAICAAAAAAAABwAAAAAAAAAAAAAAAAAAAAAAAAQHBgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgYHBwAAAAAAAAAAAAMAAAAAAAAABwYEBAUFBQUGBgYAAAAAAAAAAAAAAwMAAgAAAAAAAAAAAAAABAUHBwcHBwcHBwcHAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAUHAAAAAAAAAAAAAAAAAAAAAAAAAAcEBQYAAAAGAwMFBwYHBwcHBwUHBgIDBgUAAAYFBAcCAAAAAAAAAAADAAAAAAAAAAAHBgYGBAQGBwAAAAAAAAAAAAAAAAADAwAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAgAAAAAAAwICAAMAAgAAAAAAAAAGBgcAAAAAAAAAAAAAAAAAAAAAAAAABgMAAgUEAAAAAAIHBwUGBwcHBwQAAAAAAAUGAAQFBwAAAAAAAAAAAAAAAAAAAAAAAAcGBgUFBAQHAAQEBQUEBAAAAAAAAAMFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMDAwMDAwMAAAMAAAAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAAYHAAAAAAAAAwMDAgAAAAAAAAYGAAADBAcGAAAAAAAAAAAAAAAAAAAAAAAABwUEBQUFBQcHAAQABgUGBAMEBQAAAAAEBAQEAgAAAAAAAAAAAAIAAgIDAwAAAAAAAAAAAAAAAAAAAAAAAgQDAwMAAAAAAAAHAAAAAAAAAAAAAAAAAAAAAAAABwcAAwAAAAUHBgAAAAAAAAAAAAAAAAcHAAAAAAQCBwIAAAAAAAAAAAAAAAAAAAAAAAAHBgUFAAAAAAUHBwcHBAMAAAMDBgMCAAAAAAMDAgMEBAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMDBQQCAAAAAAQEAAAAAAcAAAAAAAAAAAAAAAAAAAUHBwAABwADBAQAAAYFBwcCAAAAAAAAAwcHBQAAAAAAAAQHBgAAAAAAAAAAAAAAAAAAAAAAAAcFAAAAAAAAAAAAAAAHBwcHBQUAAAAAAwQEAwMDAAAAAwQEAgQDAwAAAAAAAAAAAAAAAgMFBgQDAwUAAAAAAAMDAwUEAAAFBwAAAAAAAAAAAAADBwcDAAAAAAAABwAEBAQAAAQCBAcHBgcHBwcHAwMAAAQDAAAABwAABAcHAAAAAAAAAAAAAAAAAAAABwUAAAAAAAAAAAAAAAAAAAAHBwcCAAMAAAAAAgMFBQYFBAIAAwMEBAUFBQQDAwMEBAMDBQICAAAEAwMEBAQFAwAAAAAABwcHAAAAAAAAAAcHBAAAAAAAAAAAAAAABwcEAwMAAAUDBAQAAAAABAQDAAAFAAQAAAAGAAAAAAAABwcCAAAAAAAAAAAAAAAHBQAAAAAAAAAAAAAAAAAAAAAAAAMHBwADAgIDAAAAAAAEBgUEBAACAgMFAwQDAwMDAwMDAgIDAwAAAAAAAAAAAAcHBwcABwcAAwcHBwcAAAAAAAAAAAAAAAAAAAAAAAcHBAAAAAQEAgIDAAAFAwAGBQICBAAHBwAAAAAAAAAAAAAHBwcFAAAAAAAAAAcFAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAAAwMFBAMAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwcHBwAEAAAHBwcHBwcAAAAAAAICAwQAAAAAAAAAAAAAAAAHBwcHBwcHBwcHBwcHBwcHBwcHBwAAAAAAAAAAAAAAAAAABwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwAAAAACBAQFBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcHBwcHBwcHBwc=\";\nconst CELLS = 5600;\n\n/* unpacked once: the art as text for the renderer, and the ink index per cell */\nconst ART = [];\nconst COLOR = new Uint8Array(CELLS);\n{\n  const bin = atob(DATA);\n  for (let i = 0; i < CELLS; i++) {\n    const ink = bin.charCodeAt(i);\n    COLOR[i] = ink;\n    ART.push(ink ? \"\\u25cf\" : \" \");\n  }\n  // row breaks, in place, so the renderer sees a grid\n  const art = new Array(40);\n  for (let r = 0; r < 40; r++) art[r] = ART.slice(r * 140, r * 140 + 140).join(\"\");\n  ART.length = 0;\n  ART.push(art.join(\"\\n\"));\n}\n\nexport default function gojoSukuna() {\n  return (t, env = {}) => {\n    if (env.color) env.color.set(COLOR);\n    return ART[0];\n  };\n}";
   const url = URL.createObjectURL(new Blob([src], { type: "text/javascript" }));
   el.setAttribute("src", url);
   addEventListener("pagehide", () => URL.revokeObjectURL(url), { once: true });
@@ -575,18 +629,7 @@ $("#year").textContent = new Date().getFullYear();
   const loader = $("#loader");
   if (!loader) return;
   const verb = $("#loader-verb");
-  const QUOTES = [
-    "nah, i'd win.",
-    "throughout heaven and earth, i alone am the honored one.",
-    "because you're weak.",
-    "love is the most twisted curse of all.",
-    "you cryin'?",
-    "domain expansion — unlimited void.",
-    "my six eyes tell me you're geto, but my soul knows otherwise.",
-    "i'm going to raise strong jujutsu sorcerers.",
-    "the absolute strongest. the loneliness that follows.",
-    "alright — i get it now. this is hell.",
-  ];
+  const QUOTES = GOJO;
   let verbTimer = null;
   if (verb) {
     let qi = 0;
@@ -600,7 +643,7 @@ $("#year").textContent = new Date().getFullYear();
     if (gone) return;
     gone = true;
     if (verbTimer) clearInterval(verbTimer);
-    if (stopMz) stopMz();
+    if (stopLz) stopLz();
     loader.classList.add("done");
     setTimeout(() => loader.remove(), 700);
   };
@@ -609,98 +652,52 @@ $("#year").textContent = new Date().getFullYear();
   loader.addEventListener("click", hide);
   setTimeout(hide, 8000); // safety net
 
-  // the mandelbrot zoom at an insane pace. the piece's own clock runs at real
-  // time through the tag, so we mount it ourselves and scale t way up.
-  let stopMz = null;
-  const mzEl = $("#mz0");
-  if (mzEl) {
+  // the lorenz attractor, way past real time. the piece's own clock runs at
+  // one second per second through the tag, so we mount it ourselves and hand
+  // it a stretched t — six seconds of attractor for every second of boot.
+  let stopLz = null;
+  const lzEl = $("#lz0");
+  const lzWrap = lzEl && lzEl.parentElement;
+  if (lzEl) {
     let cancelled = false;
-    stopMz = () => { cancelled = true; };
+    stopLz = () => { cancelled = true; };
+    /* scale the grid so the art fills the whole loader box, edge to edge.
+       char cell is measured once, then every frame just re-solves the size. */
+    const CELL_W = 0.6, CELL_H = 1.2;
+    const fit = (text) => {
+      if (!lzWrap) return;
+      const lines = text.split("\n");
+      const cols = Math.max(1, ...lines.map((l) => l.length));
+      const rows = Math.max(1, lines.length);
+      const w = lzWrap.clientWidth, h = lzWrap.clientHeight;
+      if (!w || !h) return;
+      lzEl.style.fontSize = Math.max(2, Math.min(w / (cols * CELL_W), h / (rows * CELL_H))) + "px";
+    };
+    new ResizeObserver(() => fit(lzEl.textContent)).observe(lzWrap || lzEl);
     (async () => {
       try {
-        const mod = await import("https://ascii.rest/pieces/mandelbrot.js");
-        if (cancelled || !mzEl.isConnected) return;
+        const mod = await import("https://ascii.rest/pieces/lorenz.js");
+        if (cancelled || !lzEl.isConnected) return;
         const frame = mod.default({});
-        const SPEED = 30; // one 48 s zoom cycle, run in ~1.6 s
+        const SPEED = 6; // the piece caps a step at 0.1 s, so this is the top
         const reduced = typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
         let t = 0, last = 0;
-        const tick = (now) => {
+        const draw = (now) => {
           if (cancelled) return;
-          requestAnimationFrame(tick);
           if (!last) last = now;
           const dt = now - last;
           last = now;
           t += Math.min(dt, 120) / 1000 * SPEED;
-          mzEl.textContent = frame(t, {});
+          lzEl.textContent = frame(t, {});
+          fit(lzEl.textContent);
         };
-        if (reduced) { mzEl.textContent = frame(0, {}); return; }
-        requestAnimationFrame(tick);
+        if (reduced) { lzEl.textContent = frame(0, {}); fit(lzEl.textContent); return; }
+        requestAnimationFrame(function loop(now) { requestAnimationFrame(loop); draw(now); });
       } catch (err) {
-        console.warn("fast mandelbrot could not load", err);
+        console.warn("fast lorenz could not load", err);
       }
     })();
   }
-})();
-
-/* how fast this page loads: real navigation timings, drawn as terminal bars */
-(() => {
-  const pre = $("#loadpre");
-  if (!pre) return;
-  const render = () => {
-    try {
-      const entry = performance.getEntriesByType?.("navigation")?.[0];
-      const nav = entry || performance.timing || null;
-      if (!nav) { pre.textContent = "  n/a — this browser reports no navigation timing"; return; }
-      const rel = entry ? 0 : (nav.navigationStart || 0);
-      const n = (v) => (v == null ? null : v - rel);
-      const at = (s, e) => { const a = n(nav[s]), b = n(nav[e]); return (a != null && b != null && b >= a) ? b - a : null; };
-      const W = 28, EIGHTHS = " ▏▎▍▌▋▊▉";
-      const glyph = (v) => {
-        const e = Math.round(Math.max(0, Math.min(v, 1)) * (W - 2) * 8);
-        const k = e >> 3;
-        return "▕" + "█".repeat(k) + (k < W - 2 ? EIGHTHS[e & 7] + " ".repeat(W - 3 - k) : "") + "▏";
-      };
-      const rows = [
-        ["dns",  at("domainLookupStart", "domainLookupEnd")],
-        ["tls",  (+nav.secureConnectionStart || 0) > 0 ? n(nav.connectEnd) - n(nav.secureConnectionStart) : at("connectStart", "connectEnd")],
-        ["ttfb", at("requestStart", "responseStart")],
-        ["dom",  at("responseEnd", "domContentLoadedEventEnd")],
-        ["load", n(nav.loadEventEnd)],
-      ];
-      let total = rows[4][1];
-      const hasReal = rows.slice(0, 4).some((r) => r[1] != null && r[1] > 0) || (total != null && total > 0);
-      if (!hasReal) {
-        // the browser exposed no real timings (common on file://) — show the page's age instead
-        const alt = Math.round(performance.now());
-        const pct = alt / Math.max(2000, alt);
-        pre.innerHTML = `<span class="ttl">▸ load  </span>` +
-                        `<span class="b ttl"> ${glyph(pct)}</span>` +
-                        `<span class="ttl">${String(alt).padStart(5)}ms</span>` +
-                        `<span class="ttl">${String(Math.round(pct * 100)).padStart(4)}%</span>` +
-                        "\n  (this file didn't expose stage timings)";
-        return;
-      }
-      if (total == null || total <= 0) total = Math.round(performance.now());
-      const scale = Math.max(2000, total); // 2000 ms budget, widened when the page is slower
-      const line = (label, v) => {
-        const isTotal = label === "load";
-        const vv = (v == null || v < 0) ? 0 : v;
-        const pct = vv / scale;
-        return `<span class="${isTotal ? "ttl" : "l"}">${isTotal ? "▸ " : "  "}${label.padEnd(6)}</span>` +
-               `<span class="b ${isTotal ? "ttl" : ""}"> ${glyph(pct)}</span>` +
-               `<span class="${isTotal ? "ttl" : "ms"}">${String(Math.round(vv)).padStart(5)}ms</span>` +
-               `<span class="${isTotal ? "ttl" : "p"}">${String(Math.round(pct * 100)).padStart(4)}%</span>\n`;
-      };
-      pre.innerHTML = rows.map(([l, v]) => line(l, v)).join("");
-    } catch (err) {
-      pre.textContent = "  n/a — could not read load timings";
-      console.warn("load timing unavailable", err);
-    }
-  };
-  // render after the load event has fully finished, or loadEventEnd would still read 0
-  const ready = () => setTimeout(render, 250);
-  if (document.readyState === "complete") ready();
-  else addEventListener("load", ready, { once: true });
 })();
 
 /* github heatmap: real contributions for @spirizeon, redrawn on a timer */
@@ -750,7 +747,7 @@ $("#year").textContent = new Date().getFullYear();
     pre.hidden = false;
     fallback.hidden = true;
     const n = (data.total?.lastYear ?? days.reduce((a, d) => a + d.count, 0));
-    total.textContent = `${n.toLocaleString()} contributions in the last year · updated ${new Date().toLocaleTimeString()}`;
+    if (total) total.textContent = `${n.toLocaleString()} contributions in the last year · updated ${new Date().toLocaleTimeString()}`;
   }
 
   async function refresh() {
@@ -763,7 +760,7 @@ $("#year").textContent = new Date().getFullYear();
       if (firstRun) {
         pre.hidden = true;
         fallback.hidden = false;
-        total.textContent = "live github stats unavailable right now";
+        if (total) total.textContent = "live github stats unavailable right now";
       }
     } finally {
       firstRun = false;
@@ -836,6 +833,129 @@ $("#year").textContent = new Date().getFullYear();
   });
 })();
 
+/* the fr graph: a plotted frequency response, drawn the way a rig prints it —
+   log frequency across, spl decibels down, both channels traced cell by cell. */
+(() => {
+  const el = $("#frcurve");
+  if (!el) return;
+
+  /* (hz, spl db) read off the rig printout for the moondrop space travel 2 ultra */
+  const CURVE = [
+    [20, 66.0], [25, 65.8], [30, 65.5], [40, 64.5], [50, 64.0], [60, 63.2], [70, 62.7],
+    [80, 62.2], [100, 61.3], [150, 60.4], [200, 60.0], [300, 59.6], [400, 59.4], [500, 59.4],
+    [600, 59.5], [800, 59.8], [1000, 60.5], [1200, 61.0], [1500, 61.6], [2000, 63.0],
+    [2400, 65.0], [2800, 67.4], [3200, 68.6], [3600, 68.8], [4000, 68.4], [4300, 66.8],
+    [4600, 67.0], [5000, 68.5], [5400, 66.0], [5800, 63.6], [6200, 62.5], [6600, 62.4],
+    [7000, 63.0], [7400, 63.4], [7800, 65.6], [8100, 68.4], [8400, 67.0], [8700, 64.2],
+    [9000, 62.6], [9500, 62.0], [10000, 62.2], [10500, 61.4], [11000, 57.0], [11500, 51.6],
+    [12000, 50.0], [12500, 50.4], [13000, 48.0], [13500, 41.0], [14000, 33.4], [14500, 41.0],
+    [15000, 34.0], [15500, 30.0], [17000, 29.6], [20000, 29.5],
+  ];
+
+  const COLS = 112, ROWS = 26;
+  const DB_MIN = 28, DB_MAX = 74;
+  const LABEL_W = 4;
+  const TICKS = [
+    [20, "20"], [100, "100"], [1000, "1k"], [10000, "10k"], [20000, "20k"],
+  ];
+  const GRID_HZ = [100, 1000, 10000]; // decade lines
+  const GRID_DB = [30, 40, 50, 60, 70]; // spl lines
+
+  const xOf = (hz) => Math.log10(hz / 20) / 3 * (COLS - 1); // 20 hz -> 0, 20 khz -> right
+  const yOf = (db) => (DB_MAX - db) / (DB_MAX - DB_MIN) * (ROWS - 1);
+
+  /* the spline is sampled onto the cell grid once: db per column, per channel */
+  const sample = (offset) => {
+    const out = new Float64Array(COLS);
+    for (let c = 0; c < COLS; c++) {
+      const hz = 20 * Math.pow(1000, c / (COLS - 1));
+      let i = 0;
+      while (i < CURVE.length - 2 && CURVE[i + 1][0] < hz) i++;
+      const [f0, d0] = CURVE[i], [f1, d1] = CURVE[i + 1];
+      const u = f1 === f0 ? 0 : Math.min(1, Math.max(0, Math.log(hz / f0) / Math.log(f1 / f0)));
+      const wobble = offset * Math.sin(c * 0.7) * 0.5; // the two channels never sit perfectly flat
+      out[c] = d0 + (d1 - d0) * u + wobble;
+    }
+    return out;
+  };
+
+  const L = sample(0.12);
+  const R = sample(-0.12);
+
+  const blank = () => Array.from({ length: ROWS }, () => new Array(COLS).fill(" "));
+
+  /* decade lines and spl lines, drawn first so the trace always lands on top */
+  const gridAt = () => {
+    const g = blank();
+    for (const db of GRID_DB) {
+      const r = Math.round(yOf(db));
+      if (r >= 0 && r < ROWS) for (let c = 0; c < COLS; c++) if (g[r][c] === " ") g[r][c] = ".";
+    }
+    for (const hz of GRID_HZ) {
+      const c = Math.round(xOf(hz));
+      if (c > 0 && c < COLS) for (let r = 0; r < ROWS; r++) if (g[r][c] === " ") g[r][c] = "│";
+    }
+    return g;
+  };
+
+  /* which rows carry a dB label: the cell the gridline snapped to */
+  const LABELS = new Map();
+  for (let db = Math.ceil(DB_MIN / 10) * 10; db <= DB_MAX; db += 10) LABELS.set(Math.round(yOf(db)), db);
+
+  /* the trace is drawn over the grid, so it wins any cell it lands on */
+  const put = (g, c, r, ch) => {
+    if (c < 0 || c >= COLS || r < 0 || r >= ROWS) return;
+    g[r][c] = ch;
+  };
+
+  /* a cell's glyph follows the slope: steep reads as a slash, flat as a rule */
+  const glyph = (db, prev, next) => {
+    const rise = next - prev, fall = prev - next, m = Math.max(Math.abs(rise), Math.abs(fall));
+    if (m < 0.12) return "─";
+    if (m > 2.2) return rise > fall ? "/" : "\\";
+    return rise > fall ? "╱" : "╲";
+  };
+
+  /* both channels: the left channel is the solid trace, the right one shows
+     through as a dotted overlay only where the two drift apart by a cell */
+const trace = (upto) => {
+    const g = gridAt();
+    const at = (arr, c) => arr[Math.max(0, Math.min(COLS - 1, c))];
+    let prevRow = null;
+    for (let c = 0; c < Math.min(upto, COLS); c++) {
+      const rl = Math.round(yOf(L[c])), rr = Math.round(yOf(R[c]));
+      const ch = glyph(L[c], at(L, c - 1), at(L, c + 1));
+      put(g, c, rl, ch);
+      // the cliff past 11 khz falls several cells in one column: join them up
+      if (prevRow !== null && Math.abs(rl - prevRow) > 1) {
+        const lo = Math.min(rl, prevRow), hi = Math.max(rl, prevRow);
+        for (let r = lo + 1; r < hi; r++) put(g, c, r, rl > prevRow ? "\\" : "/");
+      }
+      prevRow = rl;
+      if (rr !== rl) put(g, c, rr, R[c] > at(R, c + 1) ? ":" : ";");
+    }
+    return g;
+  };
+
+  /* the axis frame: dB down the left edge, frequency along the bottom */
+  const render = (g) => {
+    const body = [];
+    for (let r = 0; r < ROWS; r++) {
+      const lab = LABELS.has(r) ? String(LABELS.get(r)).padStart(LABEL_W) : " ".repeat(LABEL_W);
+      body.push(lab + g[r].join(""));
+    }
+    const axis = new Array(COLS).fill(" ");
+    for (const [hz, txt] of TICKS) {
+      const c = Math.min(Math.max(1, Math.round(xOf(hz))), COLS - txt.length);
+      for (let i = 0; i < txt.length; i++) axis[c + i] = txt[i];
+    }
+    body.push(" ".repeat(LABEL_W) + axis.join(""));
+    return body.join("\n");
+  };
+
+  el.textContent = render(trace(COLS));
+})();
+
 /* the writings: expandable list of posts from berzi.one. edit BLOGS with your next post. */
 (() => {
   const faq = $("#blog-faq");
@@ -850,6 +970,70 @@ $("#year").textContent = new Date().getFullYear();
     `<span class="bt">${b.title}</span><span class="bd">${b.date}</span></summary>` +
     `<div class="bdesc">${b.desc} — <a href="${b.url}" target="_blank" rel="noopener">read the post <b>→</b></a></div>` +
     `</details>`).join("");
+})();
+
+/* ─────────────────────────────────────────────────────────────────────
+   the tab title: gojo's lines as a marquee. each one types itself in from the
+   left, rests, then slides off to the right before the next arrives — a tab
+   bar has no marquee element of its own, so this is the one thing on the page
+   that moves while nothing else does. it stops for anyone who asked for less
+   motion, and it parks on a plain title whenever the tab is in the background
+   rather than racing through ten quotes unseen.
+   ───────────────────────────────────────────────────────────────────── */
+(() => {
+  const QUIET = "ayush dutta"; // what the tab says when the marquee is not running
+  const WIN = 26; // how much of a line the tab has room for at once
+  const TYPE = 65; // ms a letter
+  const SLIDE = 42; // ms a letter of travel
+  const BEAT = 1600; // ms a finished line rests
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+
+  let line = 0, typed = 0, at = 0, phase = "type", timer = 0;
+
+  const paint = () => {
+    const text = GOJO[line];
+    if (phase === "type") document.title = text.slice(0, typed);
+    else if (phase === "hold") document.title = text + " — spirizeon";
+    else document.title = (text.slice(at, at + WIN) + "        ").slice(0, WIN);
+  };
+
+  // one chain of timeouts, so each phase can have its own cadence
+  const run = () => {
+    const text = GOJO[line];
+    paint();
+    const wait = phase === "type" ? TYPE : phase === "slide" ? SLIDE : BEAT;
+    timer = setTimeout(() => {
+      if (phase === "type") {
+        if (++typed >= text.length) { phase = "hold"; }
+        else { run(); return; } // keep typing at TYPE
+      } else if (phase === "hold") {
+        phase = "slide";
+        at = 0;
+      } else if (++at >= text.length) {
+        line = (line + 1) % GOJO.length;
+        typed = 0;
+        phase = "type";
+      }
+      run();
+    }, wait);
+  };
+
+  const stop = () => clearTimeout(timer);
+  if (reduced.matches) {
+    document.title = QUIET;
+  } else {
+    run();
+    document.addEventListener("visibilitychange", () => {
+      stop();
+      if (document.hidden) document.title = QUIET; // you are back: here's what this tab is
+      else run();
+    });
+    reduced.addEventListener?.("change", (e) => {
+      stop();
+      if (e.matches) document.title = QUIET;
+      else run();
+    });
+  }
 })();
 </script>
 </body>

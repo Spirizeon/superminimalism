@@ -1,0 +1,22 @@
+# Cloudflare Pages / Workers static assets headers.
+# 'unsafe-inline' is required in script-src because every page carries inline
+# JSON-LD structured data, and in style-src because every page inlines its
+# stylesheet on purpose (one HTTP request, no build step).
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Frame-Options: DENY
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
+  Cross-Origin-Opener-Policy: same-origin
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://ascii.rest 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' https://ascii.rest; img-src 'self' data:; connect-src 'self' https://ascii.rest; frame-ancestors 'none'; base-uri 'none'; form-action 'none'; object-src 'none'
+
+# Never cache the AI-readable manifests so edits propagate immediately.
+/llms.txt
+  Cache-Control: public, max-age=3600
+
+/llms-full.txt
+  Cache-Control: public, max-age=3600
+
+/skill.md
+  Cache-Control: public, max-age=3600

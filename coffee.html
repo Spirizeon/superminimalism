@@ -7,10 +7,8 @@
 
   <!-- SEO / Social meta – same pattern as index.html -->
   <title>Coffee Recommendations for Late‑Night Nerds</title>
-  <meta name="description"
-        content="Ground coffee beats instant for health‑conscious college geeks pulling all‑nighters. Brands, roasts, and campus delivery tips.">
-  <meta name="keywords"
-        content="coffee, ground coffee, instant coffee, tech geeks, college, health, roast, blue tokai, lavazza, odd coffee, third wave, kali coffee, agastya coffee, homegrounds">
+  <meta name="description" content="A coder's guide to Indian coffee roasters, roasts and brew tips for 2 AM debugging sessions.">
+  <meta name="keywords" content="coffee, coding, late night, India, Lavazza, Blue Tokai, Odd Coffee, Third Wave Coffee, Kali Coffee, Agastya, UPI, brew tips">
   <meta name="author" content="Ayush Dutta">
   <meta name="theme-color" content="#000000">
   <meta name="robots" content="index, follow">
@@ -19,20 +17,25 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Coffee Recommendations for Late‑Night Nerds">
-  <meta property="og:description"
-        content="Ground coffee beats instant for health‑conscious college geeks pulling all‑nighters.">
+  <meta property="og:description" content="A coder's guide to Indian coffee roasters, roasts and brew tips for 2 AM debugging sessions.">
   <meta property="og:url" content="https://berzi.one/coffee">
   <meta property="og:site_name" content="Ayush Dutta">
   <meta property="og:image" content="https://berzi.one/og-image.png">
+  <meta property="og:image:alt" content="Ayush Dutta">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Coffee Recommendations for Late‑Night Nerds">
-  <meta name="twitter:description"
-        content="Ground coffee beats instant for health‑conscious college geeks pulling all‑nighters.">
+  <meta name="twitter:description" content="A coder's guide to Indian coffee roasters, roasts and brew tips for 2 AM debugging sessions.">
   <meta name="twitter:image" content="https://berzi.one/og-image.png">
 
-  <!-- Structured Data – Person (unchanged) -->
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔️</text></svg>">
+
+  <!-- ascii.rest: animated ascii art, no build step -->
+  <script type="module" src="https://ascii.rest/ascii.js"></script>
+
+  <!-- Structured Data – Person -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -40,52 +43,70 @@
     "name": "Ayush Dutta",
     "url": "https://berzi.one/",
     "jobTitle": "Security Researcher & Developer",
-    "description": "22‑year‑old security researcher and developer building accessible security education",
+    "description": "Security researcher and developer building accessible security and reproducible machines",
     "sameAs": [
       "https://github.com/spirizeon",
       "https://linkedin.com/in/ayushduttasrmap",
       "https://x.com/berzelion",
-      "https://blog.berzi.one"
+      "https://blog.berzi.one",
+      "https://cal.com/berzi"
     ]
   }
   </script>
 
-  <!-- Structured Data – WebSite (unchanged) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Ayush Dutta",
-    "url": "https://berzi.one/",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://berzi.one/?s={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
-
-  <!-- Inline stylesheet – identical to index.html -->
+  <!-- Inline stylesheet – identical to hermetic.html -->
   <style>
+
+    :root {
+      --green:  #56a37c;
+      --red:    #fb4934;
+      --yellow: #d8a657;
+      --blue:   #83a598;
+      --grey:   #888888;
+      --line:   #333333;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "ascii.rest mono", monospace;
+    }
+
     *,*::before,*::after{box-sizing:border-box}
     html{font-size:16px;-webkit-text-size-adjust:100%}
-    body{background:#000;color:#fff;font-family:monospace;font-size:1rem;line-height:1.8;max-width:680px;margin:0 auto;padding:48px 24px;position:relative}
-    a{color:#56a37c;text-decoration:underline;text-underline-offset:2px}
+    body{background:#050505;color:#fff;font-family:var(--mono);font-size:1rem;line-height:1.8;max-width:680px;margin:0 auto;padding:48px 24px;position:relative}
+    a{color:var(--green);text-decoration:underline;text-underline-offset:2px}
     a:hover,a:focus{color:#fff}
-    a:focus-visible{outline:2px solid #83a598;outline-offset:2px}
-    h1{font-size:2rem;margin-bottom:.5rem;line-height:1.2}
-    h2{font-size:1.25rem;color:#56a37c;margin-top:3rem;margin-bottom:1.5rem}
+    a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+    h1{font-size:2rem;margin-bottom:.5rem;line-height:1.2;font-weight:normal}
+    h2{font-size:1.25rem;color:var(--accent,var(--green));margin-top:3rem;margin-bottom:1.5rem;font-weight:normal}
     p{margin-bottom:1rem}
     .story{font-size:1.125rem;line-height:1.8;margin-bottom:2rem}
-    .author-byline{font-size:.875rem;color:#888;margin-top:.5rem}
-    .author-byline a{color:#56a37c;text-decoration:underline}
-    .emphasis{color:#888}
-    .skip-link{position:absolute;top:-100px;left:16px;background:#83a598;color:#000;padding:12px 16px;z-index:100;font-weight:bold;border-radius:0 0 4px 4px}
+    .story li{font-size:1.05rem;line-height:1.7}
+    .author-byline{font-size:.875rem;color:var(--grey);margin-top:.5rem}
+    .author-byline a{color:var(--green);text-decoration:underline}
+    .emphasis{color:var(--grey)}
+    .story code{background:#222;padding:2px 6px;border-radius:3px;font-size:.9em}
+
+    /* ascii.rest pieces */
+    ascii-art{display:block;width:100%;color:var(--accent,var(--yellow))}
+    ascii-art pre{margin:0;font-family:var(--mono);font-size:.75rem;line-height:1.25;white-space:pre;overflow-x:hidden}
+    ascii-art canvas{display:block;width:100%;height:auto}
+
+    .hero-art{display:flex;justify-content:center;background:#050505;border-bottom:1px solid var(--line);padding-bottom:1.5rem;margin-bottom:2rem}
+    .candle-art{display:flex;justify-content:center;margin:2.5rem 0}
+
+    /* chapter accents */
+    .accent-1{--accent:var(--yellow)}
+    .accent-2{--accent:var(--green)}
+    .accent-3{--accent:var(--blue)}
+
+    .panel{border:1px solid var(--accent,var(--line));border-radius:4px;padding:1.25rem 1.5rem;margin:2.5rem 0}
+    .panel>h2{margin-top:0}
+
+    .divider{margin:3rem 0;color:var(--grey);font-family:var(--mono);font-size:.75rem;line-height:1;white-space:nowrap;overflow:hidden;text-align:center}
+
+    .skip-link{position:absolute;top:-100px;left:16px;background:var(--blue);color:#000;padding:12px 16px;z-index:100;font-weight:bold;border-radius:0 0 4px 4px}
     .skip-link:focus{top:0}
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
     @media(forced-colors:active){a{text-decoration:underline}}
-    footer{margin-top:4rem;padding-top:1.5rem;border-top:1px solid #333;color:#888}
+    footer{margin-top:4rem;padding-top:1.5rem;border-top:1px solid var(--line);color:var(--grey)}
   </style>
 </head>
 <body>
@@ -96,6 +117,10 @@
   <h1>Coffee &amp; Code</h1>
   <p>Fuel for the midnight‑hackers</p>
   <p class="author-byline"><a href="/">← back to home</a></p>
+
+  <div class="hero-art">
+    <ascii-art piece="coffee" fps="14" label="A cup of coffee on its saucer, steam curling up from the surface"></ascii-art>
+  </div>
 </header>
 
 <main id="main">
@@ -104,41 +129,43 @@
   <section aria-labelledby="intro-heading">
     <h2 id="intro-heading" class="sr-only">Why coffee matters</h2>
     <p class="story">
-      The night‑owl in a CS dorm lives by two things: a blazing screen and a cuppa that doesn’t quit you halfway through the final compilation. When the clock strikes <em>02:00 AM</em> and the IDE is still shouting “syntax error”, the right bean can be the difference between a working prototype and a caffeine‑induced crash.
+      The night‑owl in a CS dorm lives by two things: a blazing screen and a cuppa that doesn’t quit you halfway through the final compilation. When the clock strikes <em>02:00 AM</em> and the IDE is still shouting “syntax error”, the right bean can be the difference between a working prototype and a caffeine‑induced crash.
     </p>
   </section>
 
+  <pre class="divider" aria-hidden="true">·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·</pre>
+
   <!-- Ground vs. instant -->
-  <section aria-labelledby="ground-vs-instant">
-    <h2 id="ground-vs-instant">Ground coffee > Instant</h2>
+  <section class="panel accent-2" aria-labelledby="ground-vs-instant">
+    <h2 id="ground-vs-instant">Ground coffee &gt; Instant</h2>
     <p class="story">
       <strong>Health angle:</strong> Whole beans keep most of the antioxidants intact and release caffeine in a steadier wave. That means you stay alert without the dreaded “spike‑and‑crash” that instant blends often produce. Instant coffee, on the other hand, usually ships with added sugars, caramel, or preservatives – fine for a one‑off, but not for marathon coding sessions.
     </p>
     <p class="story">
-      <strong>Cost &amp; flavor:</strong> A 250 g bag of decent ground coffee (≈ ₹540) yields dozens of cups, while the same weight of instant coffee is a tad cheaper per gram but delivers a flatter, sometimes bitter taste. If you’re budgeting, buy a modest‑sized bag and grind only what you need – the grinder costs almost nothing if you already have a burr grinder.
+      <strong>Cost &amp; flavor:</strong> A 250 g bag of decent ground coffee (≈ ₹540) yields dozens of cups, while the same weight of instant coffee is a tad cheaper per gram but delivers a flatter, sometimes bitter taste. If you’re budgeting, buy a modest‑sized bag and grind only what you need – the grinder costs almost nothing if you already have a burr grinder.
     </p>
   </section>
 
   <!-- Brand & Roast guide -->
-  <section aria-labelledby="brand-roast">
+  <section class="panel accent-1" aria-labelledby="brand-roast">
     <h2 id="brand-roast">Brand &amp; roast guide</h2>
 
-    <p class="story"><strong>Lavazza – “Il Mattino” line</strong> – built for the “working man”. The bold variant is a little harsh on the tongue, but if you want a cheap, sane cup, pick the **Supreme** blend. Best for early‑morning debugging when you need a reliable, no‑fluff caffeine kick.</p>
+    <p class="story"><strong>Lavazza – “Il Mattino” line</strong> – built for the “working man”. The bold variant is a little harsh on the tongue, but if you want a cheap, sane cup, pick the <strong>Supreme</strong> blend. Best for early‑morning debugging when you need a reliable, no‑fluff caffeine kick.</p>
 
     <p class="story"><strong>Blue Tokai</strong> – offers Attikan Estate, French Roast, and Vienna Roast (all medium‑to‑dark). <em>Dark roast + milk</em> gives a velvety mouthfeel perfect for those late‑night study breaks; <em>medium‑roast</em> works as an all‑rounder; and their <em>light roast</em> is the cleanest start‑of‑day option when you need a bright, acidic snap.</p>
 
     <p class="story"><strong>Blue Tokai – "Silver Oak Blend"</strong> – <em>medium roast</em> that smells like honey, has a beautiful boom in pour‑overs, sour like grapes, and a clean aftertaste. Perfect for making your mornings great.</p>
 
-    <p class="story"><strong>Odd Coffee – “Breakfast Blend”</strong> – the only place in the Indian market where you’ll find a genuine *light roast*. Pair it with a splash of oat‑milk for a gentle yet alert start. Ideal for a pre‑lecture boost or when you’re pulling an 8‑hour coding sprint.</p>
+    <p class="story"><strong>Odd Coffee – “Breakfast Blend”</strong> – the only place in the Indian market where you’ll find a genuine <em>light roast</em>. Pair it with a splash of oat‑milk for a gentle yet alert start. Ideal for a pre‑lecture boost or when you’re pulling an 8‑hour coding sprint.</p>
 
-    <p class="story"><strong>Third Wave Coffee – Vienna Roast</strong> – delivers a dark, chocolatey cup that stays stable for hours. The brand ships to most campuses (my own campus gets it within **2 days**), making it a perfect **emergency brew** when you run out of beans.</p>
+    <p class="story"><strong>Third Wave Coffee – Vienna Roast</strong> – delivers a dark, chocolatey cup that stays stable for hours. The brand ships to most campuses (my own campus gets it within <strong>2 days</strong>), making it a perfect <strong>emergency brew</strong> when you run out of beans.</p>
 
-    <p class="story"><strong>Kali Coffee Roaster – “Shoonya” (Medium‑Plus Roast)</strong> – this one blew me away. The product page calls it an **Espresso Blend** with flavor notes of **chocolate** and **roasted almonds**. The aroma is bright, almost floral, and sticks around long enough to keep the mind sharp through a 4‑hour debugging marathon. Best consumed **straight, no milk**, when you need pure focus.</p>
+    <p class="story"><strong>Kali Coffee Roaster – “Shoonya” (Medium‑Plus Roast)</strong> – this one blew me away. The product page calls it an <strong>Espresso Blend</strong> with flavor notes of <strong>chocolate</strong> and <strong>roasted almonds</strong>. The aroma is bright, almost floral, and sticks around long enough to keep the mind sharp through a 4‑hour debugging marathon. Best consumed <strong>straight, no milk</strong>, when you need pure focus.</p>
 
     <p class="story"><strong>Agastya Coffee – “Mysore Nuggets” (Medium Roast)</strong> – rode a huge hype wave on campus, but the cup fell flat for me. Decent caffeine kick, but the flavor lacked depth and the aroma was under‑whelming. If you want to try it, do it **as a novelty** after you’ve already tasted something more robust.</p>
 
     <p class="story">
-      Quick ordering links (all **UPI‑ready**):<br>
+      Quick ordering links (all <strong>UPI‑ready</strong>):<br>
       <a href="https://oddcoffee.in/">Odd Coffee</a> •
       <a href="https://bluetokaicoffee.com/">Blue Tokai</a> •
       <a href="https://lavazza.in/">Lavazza</a> •
@@ -149,14 +176,16 @@
     </p>
   </section>
 
+  <pre class="divider" aria-hidden="true">·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·</pre>
+
   <!-- Brew tips -->
-  <section aria-labelledby="brew-tips">
+  <section class="panel accent-3" aria-labelledby="brew-tips">
     <h2 id="brew-tips">Quick brew tips for coders</h2>
     <ul class="story">
       <li>Use a French press or AeroPress – cheap, quick, and give you control over extraction.</li>
-      <li>Grind just before brewing; a **coarse grind** reduces bitterness for dark roasts.</li>
-      <li>Water at ~92 °C (just below boiling) extracts the sweet oils without burning the grounds.</li>
-      <li>If you absolutely must use instant in a pinch, choose a “pure Arabica” blend and add a splash of milk or oat‑milk to tame acidity.</li>
+      <li>Grind just before brewing; a <strong>coarse grind</strong> reduces bitterness for dark roasts.</li>
+      <li>Water at ~92 °C (just below boiling) extracts the sweet oils without burning the grounds.</li>
+      <li>If you absolutely must use instant in a pinch, choose a “pure Arabica” blend and add a splash of milk or oat‑milk to tame acidity.</li>
     </ul>
   </section>
 
@@ -167,15 +196,19 @@
       Want a fresh bag delivered straight to your dorm? You have three hassle‑free ways:<br>
       • <strong>Homegrounds app</strong> – the fastest way to browse 20+ Indian roasters, add beans to cart, and checkout with a single tap.<br>
       • <strong>Amazon India</strong> – search the brand name + “coffee” and click “Buy now”.<br>
-      • <strong>Directly on the roaster’s website</strong> (Lavazza, Blue Tokai, Odd Coffee, Third Wave, Kali, Agastya, etc.).<br>
-      All three accept **UPI** payments, so you can pay with a QR code or a quick “Pay via UPI” button.
+      • <strong>Directly on the roaster’s website</strong> (Lavazza, Blue Tokai, Odd Coffee, Third Wave, Kali, Agastya, etc.).<br>
+      All three accept <strong>UPI</strong> payments, so you can pay with a QR code or a quick “Pay via UPI” button.
     </p>
+
+    <div class="candle-art">
+      <ascii-art piece="candle" fps="10" label="A candle burning down in its holder, then being renewed and relit"></ascii-art>
+    </div>
   </section>
 
 </main>
 
 <footer>
-  <p>last updated: 2026‑04‑16</p>
+  <p>last updated: 2026-04-16</p>
 </footer>
 
 </body>
