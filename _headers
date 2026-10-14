@@ -2,6 +2,17 @@
 # 'unsafe-inline' is required in script-src because every page carries inline
 # JSON-LD structured data, and in style-src because every page inlines its
 # stylesheet on purpose (one HTTP request, no build step).
+#
+# The extra origins below are not decoration — each one is something the page
+# actually loads, and dropping it turns a feature off with a console error:
+#   blob:                          the hero scene is a piece module handed to
+#                                  <ascii-art src> as a blob, so it must be
+#                                  importable as a script
+#   open.spotify.com, embed-cdn:  the player: the iframe api script, the sdk it
+#                                  injects, and the player frame itself
+#   github-contributions-api:      the contribution heatmap is fetched
+#   cloudflarestatus.com:          the status dot is fetched
+#   static.cloudflareinsights.com: Cloudflare's own web analytics beacon
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
@@ -9,7 +20,7 @@
   X-Frame-Options: DENY
   Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
   Cross-Origin-Opener-Policy: same-origin
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://ascii.rest 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' https://ascii.rest; img-src 'self' data:; connect-src 'self' https://ascii.rest; frame-ancestors 'none'; base-uri 'none'; form-action 'none'; object-src 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' blob: https://ascii.rest https://open.spotify.com https://embed-cdn.spotifycdn.com https://static.cloudflareinsights.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' https://ascii.rest; img-src 'self' data:; connect-src 'self' https://ascii.rest https://github-contributions-api.jogruber.de https://www.cloudflarestatus.com; frame-src 'self' https://embed-cdn.spotifycdn.com; frame-ancestors 'none'; base-uri 'none'; form-action 'none'; object-src 'none'
 
 # Never cache the AI-readable manifests so edits propagate immediately.
 /llms.txt
