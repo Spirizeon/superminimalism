@@ -9,7 +9,9 @@
 #                                  <ascii-art src> as a blob, so it must be
 #                                  importable as a script
 #   open.spotify.com, embed-cdn:  the player: the iframe api script, the sdk it
-#                                  injects, and the player frame itself
+#                                  injects (which evaluates a string, hence
+#                                  'unsafe-eval'), the bootstrap frame on
+#                                  open.spotify.com and the player frame itself
 #   github-contributions-api:      the contribution heatmap is fetched
 #   cloudflarestatus.com:          the status dot is fetched
 #   static.cloudflareinsights.com: Cloudflare's own web analytics beacon
@@ -20,7 +22,7 @@
   X-Frame-Options: DENY
   Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
   Cross-Origin-Opener-Policy: same-origin
-  Content-Security-Policy: default-src 'self'; script-src 'self' blob: https://ascii.rest https://open.spotify.com https://embed-cdn.spotifycdn.com https://static.cloudflareinsights.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' https://ascii.rest; img-src 'self' data:; connect-src 'self' https://ascii.rest https://github-contributions-api.jogruber.de https://www.cloudflarestatus.com; frame-src 'self' https://embed-cdn.spotifycdn.com; frame-ancestors 'none'; base-uri 'none'; form-action 'none'; object-src 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' blob: https://ascii.rest 'unsafe-eval' https://open.spotify.com https://embed-cdn.spotifycdn.com https://static.cloudflareinsights.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' https://ascii.rest; img-src 'self' data:; connect-src 'self' https://ascii.rest https://github-contributions-api.jogruber.de https://www.cloudflarestatus.com; frame-src 'self' https://open.spotify.com https://embed-cdn.spotifycdn.com; frame-ancestors 'none'; base-uri 'none'; form-action 'none'; object-src 'none'
 
 # Never cache the AI-readable manifests so edits propagate immediately.
 /llms.txt
